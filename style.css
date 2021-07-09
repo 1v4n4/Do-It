@@ -1,0 +1,17 @@
+header {
+  height: 14vh;
+  width: 100%;
+  position: fixed;
+  top: 0;
+
+}
+
+.logo {
+  margin-bottom: -0.2rem;
+}
+
+.projects {
+  min-height: 100vh;
+  padding-top: 20vh;
+}
+
