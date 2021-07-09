@@ -1,18 +1,48 @@
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet"
-    integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
-  <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-  <link rel="preconnect" href="https://fonts.gstatic.com">
-  <link rel="stylesheet" href="./style.css">
-  <link rel="shortcut icon" href="#">
-  <title>Restaurant</title>
-</head>
-<body>
+import {  Project, projectToDom, projectsToDom } from './modules/projects';
+// import { setProjects } from './modules/storage'
+const addForm = document.getElementById('addForm');
+
+export let myProjects = [];
+
+if (localStorage.getItem('myProjects') !== null) {
+  myProjects = JSON.parse(window.localStorage.getItem('myProjects'));
+}
+console.log(myProjects)
+
+function setProjects() {
+  console.log("in setProjectssss")
+  window.localStorage.setItem('myProjects', JSON.stringify(myProjects));
+}
+
+addForm.addEventListener('click', (e) => {
+  e.preventDefault();
 
 
-  <script src="main.js"></script>
-</body>
-</html>
+  console.log(addForm[1].value)
+
+  const newName = addForm[0].value;
+
+const newDescription = addForm[1].value;
+
+  let confirmation = true;
+
+  if (!newName) {
+    alert("Project's name can't be empty");
+    confirmation = false;
+  }
+
+  if (!confirmation) {
+    return false;
+  }
+
+  console.log("heree")
+
+  const newProject = new Project(newName, newDescription);
+  console.log(newProject)
+
+  projectToDom(newProject);
+  myProjects.push(newProject);
+  console.log('here', myProjects);
+  setProjects(myProjects)
+  projectsToDom()
+});
