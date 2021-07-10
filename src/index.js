@@ -1,4 +1,4 @@
-import {  Project, projectToDom, projectsToDom } from './modules/projects';
+import {  Project, projectToDom, projectsToDom, deleteProject } from './modules/projects';
 // import { setProjects } from './modules/storage'
 const addForm = document.getElementById('addForm');
 
@@ -48,3 +48,25 @@ const newDescription = addForm[1].value;
   setProjects(myProjects)
 
 });
+
+const projectManipulation = document.getElementById('projectsContainer');
+projectManipulation.addEventListener('click', (e) => {
+  e.preventDefault();
+
+  const clicked = e.target
+   console.log("in delete");
+
+  let removeData = clicked.closest('article').firstElementChild.textContent;
+
+  if (clicked.classList.contains('delProjectBtn')) {
+    alert('No kidding?!');
+    clicked.closest('article').remove();
+    deleteProject(myProjects, removeData);
+    console.log(myProjects);
+    setProjects();
+  }
+
+  if (clicked.classList.contains('delProjectBtn')) {
+  }
+ })
+
