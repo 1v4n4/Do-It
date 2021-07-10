@@ -9,9 +9,18 @@ function Project(name, description) {
   this.description = description;
 }
 
+const checkProject = (value) => {
+  for (let i = 0; i < myProjects.length; i += 1) {
+    if (myProjects[i].name === value) {
+      return true;
+    }
+  }
+}
+
 const projectToDom = (project) => {
 
   const projectArticle = document.createElement('article');
+  projectArticle.className = 'mt-3';
 
   const projectName = document.createElement('h3');
   projectName.className = '';
@@ -35,6 +44,8 @@ const projectToDom = (project) => {
 
   const editProjectBtn = document.createElement('button');
   editProjectBtn.className = 'editProjectBtn btn btn-light border-0 bg-secondary';
+  editProjectBtn.setAttribute('data-bs-toggle', 'modal');
+  editProjectBtn.setAttribute('data-bs-target', '#exampleModal1');
   editProjectBtn.innerHTML =`<i class="editProjectBtn fas fa-align-right text-dark"></i>`;
 
   const seeBtn = document.createElement('button');
@@ -42,7 +53,7 @@ const projectToDom = (project) => {
   seeBtn.innerHTML = `<i class="seeBtn fas fa-chevron-right text-dark">`;
 
   const seeDiv = document.createElement('div')
-  seeDiv.className ="d-flex mb-5 justify-content-between";
+  seeDiv.className ="d-flex me-5 justify-content-around";
   seeDiv.appendChild(delProjectBtn);
   seeDiv.appendChild(editProjectBtn);
   seeDiv.appendChild(seeBtn);
@@ -67,13 +78,6 @@ const deleteProject = (arr, value) => {
     return a;
 };
 
-const checkProject = (value) => {
-  for (let i = 0; i < myProjects.length; i += 1) {
-    if (myProjects[i].name === value) {
-      return true;
-    }
-  }
-}
 
 
 export { Project, projectToDom, projectsToDom, deleteProject, checkProject }

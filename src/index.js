@@ -1,6 +1,8 @@
-import {  Project, projectToDom, projectsToDom, deleteProject, checkProject } from './modules/projects';
+import {  Project, projectToDom, projectsToDom,  deleteProject, checkProject } from './modules/projects';
 // import { setProjects } from './modules/storage'
 const addForm = document.getElementById('addForm');
+const getName = document.getElementById('nameInput');
+const getDescription = document.getElementById('descriptionInput');
 
 export let myProjects = [];
 
@@ -19,8 +21,6 @@ document.addEventListener('DOMContentLoaded', projectsToDom());
 addForm.addEventListener('submit', (e) => {
   e.preventDefault();
 
-
-  console.log(addForm[1].value)
 
   const newName = addForm[0].value;
 
@@ -59,7 +59,6 @@ projectManipulation.addEventListener('click', (e) => {
   e.preventDefault();
 
   const clicked = e.target
-   console.log("in delete");
 
   let removeData = clicked.closest('article').firstElementChild.textContent;
 
@@ -71,7 +70,54 @@ projectManipulation.addEventListener('click', (e) => {
   }
 
   if (clicked.classList.contains('editProjectBtn')) {
+
     console.log('in edit');
+    let project = myProjects.find(x => x.name == removeData);
+  console.log(project);
+
+  getName.value = project.name;
+  console.log(getName);
+  getDescription.value = project.description;
+  console.log(getDescription.value);
+
+  editForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+
+    const edited = new Project(editForm[0].value, editForm[1].value)
+    console.log(edited);
+
+    let confirmation = true;
+
+    if (edited.name == project.name && edited.description == project.description) {
+      alert("You haven't change anything");
+      confirmation = false;
+      return;
+    }
+
+    const checkData = edited.name
+
+    if (checkProject(checkData) && edited.name != project.name) {
+      alert("Project with same name already exists");
+      console.log('herre');
+      confirmation = false;
+    }
+
+    if (!confirmation) {
+      return;
+    }
+
+    project.name = edited.name;
+    project.description = edited.description;
+
+    setProjects();
+    projectsContainer.innerHTML = '',
+    projectsToDom();
+
+  })
+}
+
+  if (clicked.classList.contains('seeBtn')) {
+     console.log('in see');
   }
  })
 
