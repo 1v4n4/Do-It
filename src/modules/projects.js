@@ -42,7 +42,7 @@ const projectToDom = (project) => {
   seeBtn.innerHTML = `<i class="seeBtn fas fa-chevron-right text-dark">`;
 
   const seeDiv = document.createElement('div')
-  seeDiv.className ="d-flex mb-5 justify-content-around";
+  seeDiv.className ="d-flex mb-5 justify-content-between";
   seeDiv.appendChild(delProjectBtn);
   seeDiv.appendChild(editProjectBtn);
   seeDiv.appendChild(seeBtn);
@@ -56,17 +56,24 @@ const projectsToDom = () => {
   myProjects.forEach(project => projectToDom(project));
 }
 
-const deleteProject = (arr, name) => {
+const deleteProject = (arr, value) => {
 
     let a = [];
     for (let i = 0; i < arr.length; i += 1) {
-      if (arr[i].name === name) {
+      if (arr[i].name === value) {
         a = arr.splice(i, 1);
       }
     }
     return a;
+};
+
+const checkProject = (value) => {
+  for (let i = 0; i < myProjects.length; i += 1) {
+    if (myProjects[i].name === value) {
+      return true;
+    }
+  }
 }
 
 
-
-export { Project, projectToDom, projectsToDom, deleteProject }
+export { Project, projectToDom, projectsToDom, deleteProject, checkProject }

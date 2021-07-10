@@ -1,4 +1,4 @@
-import {  Project, projectToDom, projectsToDom, deleteProject } from './modules/projects';
+import {  Project, projectToDom, projectsToDom, deleteProject, checkProject } from './modules/projects';
 // import { setProjects } from './modules/storage'
 const addForm = document.getElementById('addForm');
 
@@ -33,6 +33,11 @@ const newDescription = addForm[1].value;
     confirmation = false;
   }
 
+  if (checkProject(newName)) {
+    alert("Project with same name already exists");
+    confirmation = false;
+  }
+
   if (!confirmation) {
     return false;
   }
@@ -62,11 +67,11 @@ projectManipulation.addEventListener('click', (e) => {
     alert('No kidding?!');
     clicked.closest('article').remove();
     deleteProject(myProjects, removeData);
-    console.log(myProjects);
     setProjects();
   }
 
-  if (clicked.classList.contains('delProjectBtn')) {
+  if (clicked.classList.contains('editProjectBtn')) {
+    console.log('in edit');
   }
  })
 
