@@ -14,7 +14,9 @@ function setProjects() {
   window.localStorage.setItem('myProjects', JSON.stringify(myProjects));
 }
 
-addForm.addEventListener('click', (e) => {
+document.addEventListener('DOMContentLoaded', projectsToDom());
+
+addForm.addEventListener('submit', (e) => {
   e.preventDefault();
 
 
@@ -44,5 +46,5 @@ const newDescription = addForm[1].value;
   myProjects.push(newProject);
   console.log('here', myProjects);
   setProjects(myProjects)
-  projectsToDom()
+
 });
