@@ -15,3 +15,59 @@ header {
   padding-top: 20vh;
 }
 
+
+.to-dos {
+  padding-top: 20vh;
+}
+
+#task-name {
+  width: 100%;
+ border:none;
+ height: 3rem;
+
+}
+input[type="date" i] {
+  border:none;
+  font-family: 'Lato', 'Font Awesome 5 Free';
+}
+
+#selectPriority {
+  border: none;
+  font-family: 'Lato', 'Font Awesome 5 Free';
+  border-color: white;
+  width: auto;
+}
+
+#addCommentBtn {
+  font-family: 'Lato', 'Font Awesome 5 Free';
+  background: white;
+}
+
+#one {
+
+  color: red;
+}
+
+#two {
+
+  color: yellow;
+}
+
+#three {
+
+  color: blue;
+}
+
+#four {
+
+  color: greenyellow;
+}
+
+
+/* input#datePicker::-webkit-calendar-picker-indicator { display: none }
+
+input[type=date]::-webkit-inner-spin-button,
+input[type=date]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+} */
