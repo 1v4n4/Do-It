@@ -1,6 +1,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
   <link rel="stylesheet" href="../node_modules/@fortawesome/fontawesome-free/css/all.css">
@@ -11,7 +12,7 @@
   <title>Do it</title>
 </head>
 <body>
-
+<!-- Header -->
   <header class="bg-dark d-flex justify-content-between">
     <div class="logo-div ms-5 mt-2">
       <p class="logo fs-1 ms-3 fw-bold text-secondary">Do it!</p>
@@ -19,6 +20,7 @@
     </div>
     <p class="fs-3 text-secondary fst-italic me-5 mt-5">Make room for unplanned events</p>
   </header>
+  <!-- Projects -->
   <div class = "wrapper d-flex">
     <section class="projects col-3 bg-secondary">
       <div class="title-div d-flex justify-content-center">
@@ -27,39 +29,64 @@
           <i class="fas fa-plus"></i>
         </button>
       </div>
-      <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-          <div class="modal-dialog">
-            <div class="modal-content">
-              <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Add new project</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-              </div>
-              <form class="modal-body" id="addForm">
 
-                  <label for="exampleFormControlInput1" class="form-label">Project name</label>
-                  <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="My special project">
-
-                  <label for="exampleFormControlTextarea1" class="form-label">Description (optional)</label>
-                  <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" maxlength="150" placeholder="My special project's description"></textarea>
-
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="submit" class="btn btn-secondary" id="newProjectBtn">Create project</button>
-
-              </form>
-            </div>
-          </div>
-      </div>
       <div class="projectsContainer ms-5 mt-5" id="projectsContainer">
 
       </div>
 
     </section>
     <section class="to-dos col-6">
+      <div class="tasks-title-div d-flex justify-content-center">
+        <h4 class="taskHeadline mt-1 text-center">Your tasks</h4>
+        <button type="button" class="pb-2 text-dark btn btn-light" id="taskFormButton">
+          <i class="fas fa-plus"></i>
+        </button>
+      </div>
 
+      <form id= "taskForm" class="taskForm border border-dark mx-5 my-5">
+
+
+<!-- Button trigger modal -->
+
+
+<!-- Modal -->
+
+
+
+
+
+
+      </form>
+
+      </form>
     </section>
     <section class="new col-3">
 
     </section>
+  </div>
+
+  <!-- Modals -->
+  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Add new project</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <form class="modal-body" id="addForm">
+
+            <label for="exampleFormControlInput1" class="form-label">Project name</label>
+            <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="My special project">
+
+            <label for="exampleFormControlTextarea1" class="form-label">Description (optional)</label>
+            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" maxlength="150" placeholder="My special project's description"></textarea>
+
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="submit" class="btn btn-secondary" id="newProjectBtn">Create project</button>
+
+        </form>
+      </div>
+    </div>
   </div>
   <div class="modal fade" id="exampleModal1" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
@@ -82,7 +109,7 @@
         </form>
       </div>
     </div>
-</div>
+  </div>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
   <script src="main.js"></script>
 </body>
