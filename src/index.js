@@ -1,8 +1,11 @@
-import {  Project, projectToDom, projectsToDom,  deleteProject, checkProject } from './modules/projects';
+import { Project, projectToDom, projectsToDom,  deleteProject, checkProject } from './modules/projects';
+import { makeTaskForm, makeTaskSection } from './modules/tasks';
+
 // import { setProjects } from './modules/storage'
 const addForm = document.getElementById('addForm');
 const getName = document.getElementById('nameInput');
 const getDescription = document.getElementById('descriptionInput');
+const toDos = document.getElementById('toDos');
 
 export let myProjects = [];
 
@@ -114,37 +117,23 @@ projectManipulation.addEventListener('click', (e) => {
 
   })
 }
+if (clicked.classList.contains('seeBtn')) {
 
-  if (clicked.classList.contains('seeBtn')) {
-     console.log('in see');
-  }
- })
+  console.log('in see');
+   makeTaskSection();
+ }
+
+});
 
 
-  const addTaskForm = document.getElementById('taskForm');
-  addTaskForm.innerHTML = `<input type="text" name="taskName" id="task-name">
-  <div class="dropdownDiv d-flex justify-content-between">
-        <div class="dropDownLeft">
-          <button type="button" class="btn btn-light ps-3" id="addCommentBtn" data-bs-toggle="modal" data-bs-target="#commentModal">
-            Add comment
-          </button>
-          <div class="modal fade" id="commentModal" tabindex="-1" aria-labelledby="commentModalLabel" aria-hidden="true">
-            <div class="modal-dialog">
-              <textarea  id="comment" rows="3" maxlength="150" placeholder="Add comment here"></textarea>
-              <br>
-              <button type="button" class="btn btn-secondary">Save changes</button>
-            </div>
-          </div>
-        </div>
+toDos.addEventListener('click', (e) => {
+   e.preventDefault();
 
-        <div class="dropDownLeft d-flex">
-          <select class="form-select me-4" id="selectPriority" aria-label="Default select example">
-            <option selected>Select priority level</option>
-            <option id="one" value="1">&#xf024; Priority 1</option>
-            <option id="two" value="2">&#xf024; Priority 2</option>
-            <option id="three" value="3">&#xf024; Priority 3</option>
-            <option id="four" value="4">&#xf024; Priority 4</option>
-          </select>
-          <input type="date" id="datePicker">
-        </div>
-  </div>`
+   const clicked = e.target;
+   console.log('here');
+   if (clicked.classList.contains('plus')) {
+  console.log('here');
+  makeTaskForm();
+   }
+});
+
