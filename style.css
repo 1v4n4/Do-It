@@ -15,9 +15,8 @@ header {
   padding-top: 20vh;
 }
 
-
-.to-dos {
-  padding-top: 20vh;
+#toDos {
+  margin-top: 8vh;
 }
 
 #task-name {
