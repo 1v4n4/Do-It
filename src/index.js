@@ -1,5 +1,5 @@
 import { Project, projectToDom, projectsToDom,  deleteProject, checkProject } from './modules/projects';
-import { makeTaskForm, makeTaskSectionOnClick, Task, makeTaskSection, tasksToDom } from './modules/tasks';
+import { makeTaskForm, makeTaskSectionOnClick, changeStatus, Task, makeTaskSection, tasksToDom, deleteAllTasks } from './modules/tasks';
 
 // import { setProjects } from './modules/storage'
 const addForm = document.getElementById('addForm');
@@ -86,7 +86,9 @@ projectManipulation.addEventListener('click', (e) => {
     alert('No kidding?!');
     clicked.closest('article').remove();
     deleteProject(myProjects, currentProject);
+    deleteAllTasks(currentProject);
     setProjects();
+    setTasks();
   }
 
   if (clicked.classList.contains('editProjectBtn')) {
@@ -176,9 +178,8 @@ first.addEventListener('click', (e) => {
   if (confirm = false) {
     return;
   }
-  taskID+=1;
 
-  const newTask = new Task(taskID, newTitle, currentProject, newComment, newPriority, newDate);
+  const newTask = new Task(newTitle, currentProject, newComment, newPriority, newDate);
   console.log(newTask);
   myTasks.push(newTask);
   setTasks();
@@ -199,7 +200,11 @@ first.addEventListener('click', (e) => {
     myTasks.splice(index, 1);
     setTasks();
   }
-  if(clicked.classList.contains('deleteTaskBtn')) {
-
+  if(clicked.classList.contains('statusBTN')) {
+    console.log("in finished");
+    changeStatus(index);
+    setTasks();
+    let selectedTasks = myTasks.filter(task => task.projectsN === currentProject);
+    makeTaskSection(currentProject, selectedTasks);
   }
  });

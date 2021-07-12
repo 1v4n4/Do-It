@@ -28,6 +28,6 @@ const Flag = (priority) => {
 }
 
 const Status = (value) => {
-  return value ? '<i class="fas fa-check  text-dark"></i>' : '<i class="fas fa-spinner text-dark"></i>';
+  return value ? '<i class="fas fa-check  text-dark statusBTN"></i>' : '<i class="fas fa-spinner text-dark statusBTN"></i>';
 }
 export { setDate, Flag, Status };

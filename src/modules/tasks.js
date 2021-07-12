@@ -160,8 +160,22 @@ const tasksToDom = (selected) => {
  });
 }
 
+const changeStatus = (index) => {
+  myTasks[index].finished ? myTasks[index].finished = false : myTasks[index].finished = true;
+};
 
+const deleteAllTasks = (currentProject) => {
+  console.log('in')
+  myTasks.forEach((task) => {
+    if (task.projectsN == currentProject) {
+      console.log('innn')
+      let index = myTasks.indexOf(task);
+      console.log(index)
+      myTasks.splice(index, 1);
+      first.innerHTML = '';
+      tableArticle.innerHTML = '';
+    }
+  });
+};
 
-
-
-export { makeTaskForm, makeTaskSectionOnClick, makeTaskSection, Task, tasksToDom }
+export { makeTaskForm, makeTaskSectionOnClick, makeTaskSection, Task, tasksToDom, changeStatus, deleteAllTasks }
