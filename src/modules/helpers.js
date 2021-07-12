@@ -12,4 +12,22 @@ const setDate = () => {
   today = yyyy + '-' + mm + '-' + dd;
   return today;
 };
-export { setDate };
+
+
+const Flag = (priority) => {
+  if (priority == 1)
+  return '<i class="fas fa-flag text-success"></i>'
+  else
+  if (priority == 2)
+  return '<i class="fas fa-flag text-info"></i>';
+  else
+  if (priority == 3)
+  return '<i class="fas fa-flag text-warning"></i>'
+  else
+  return '<i class="fas fa-flag text-danger"></i>'
+}
+
+const Status = (value) => {
+  return value ? '<i class="fas fa-check  text-dark"></i>' : '<i class="fas fa-spinner text-dark"></i>';
+}
+export { setDate, Flag, Status };

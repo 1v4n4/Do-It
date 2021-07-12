@@ -1,11 +1,13 @@
 import { Project, projectToDom, projectsToDom,  deleteProject, checkProject } from './modules/projects';
-import { makeTaskForm, makeTaskSection, Task } from './modules/tasks';
+import { makeTaskForm, makeTaskSectionOnClick, Task, makeTaskSection, tasksToDom } from './modules/tasks';
 
 // import { setProjects } from './modules/storage'
 const addForm = document.getElementById('addForm');
 const getName = document.getElementById('nameInput');
 const getDescription = document.getElementById('descriptionInput');
 const first = document.getElementById('first');
+const projectsContainer = document.getElementById('projectsContainer');
+const tableArticle = document.getElementById('tableArticle');
 
 export let myProjects = [];
 
@@ -62,12 +64,12 @@ const newDescription = addForm[1].value;
   console.log("heree")
 
   const newProject = new Project(newName, newDescription);
-  console.log(newProject)
-
-  projectToDom(newProject);
+  console.log(newProject);
   myProjects.push(newProject);
-  console.log('here', myProjects);
-  setProjects(myProjects)
+  setProjects(myProjects);
+  projectsContainer.innerHTML = ''
+  projectsToDom();
+
 
 });
 
@@ -77,19 +79,20 @@ projectManipulation.addEventListener('click', (e) => {
 
   const clicked = e.target
 
-  let removeData = clicked.closest('article').firstElementChild.textContent;
+  currentProject = clicked.closest('article').firstElementChild.textContent;
+  let selectedTasks = myTasks.filter(task => task.projectsN === currentProject);
 
   if (clicked.classList.contains('delProjectBtn')) {
     alert('No kidding?!');
     clicked.closest('article').remove();
-    deleteProject(myProjects, removeData);
+    deleteProject(myProjects, currentProject);
     setProjects();
   }
 
   if (clicked.classList.contains('editProjectBtn')) {
 
     console.log('in edit');
-    let project = myProjects.find(x => x.name == removeData);
+    let project = myProjects.find(x => x.name == currentProject);
   console.log(project);
 
   getName.value = project.name;
@@ -127,16 +130,19 @@ projectManipulation.addEventListener('click', (e) => {
     project.description = edited.description;
 
     setProjects();
-    projectsContainer.innerHTML = '',
+    projectsContainer.innerHTML = '';
     projectsToDom();
 
     })
 }
 if (clicked.classList.contains('seeBtn')) {
 
-   makeTaskSection(removeData);
+
+   makeTaskSectionOnClick(currentProject, selectedTasks);
+
+
  }
- currentProject = removeData;
+ currentProject = currentProject;
 });
 
 
@@ -175,6 +181,8 @@ first.addEventListener('click', (e) => {
   const newTask = new Task(newTitle, currentProject, newComment, newPriority, newDate);
   console.log(newTask);
   myTasks.push(newTask);
-  console.log(myTasks);
   setTasks();
+  let selectedTasks = myTasks.filter(task => task.projectsN === currentProject);
+
+  makeTaskSection(currentProject, selectedTasks);
  })

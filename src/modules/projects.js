@@ -23,7 +23,7 @@ const projectToDom = (project) => {
   projectArticle.className = 'mt-3';
 
   const projectName = document.createElement('h3');
-  projectName.className = '';
+  projectName.className = 'text-center';
   const projectNameText = document.createTextNode(project.name);
   projectName.appendChild(projectNameText);
 

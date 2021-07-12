@@ -1,6 +1,6 @@
 import { myProjects, myTasks } from '../index';
 import { projectsToDom } from './projects';
-import { setDate } from './helpers';
+import { setDate, Flag, Status } from './helpers';
 
 function Task(title, projectsN, comment, priority, deadline) {
   this.title = title;
@@ -14,10 +14,12 @@ function Task(title, projectsN, comment, priority, deadline) {
 const toDos = document.getElementById('toDos');
 const first = document.getElementById('first');
 const taskForm = document.getElementById('taskForm');
+const tableArticle = document.getElementById('tableArticle');
+
 let countProject = false;
 let countForm = false;
 
-const makeTaskSection = (value) => {
+const makeTaskSectionOnClick = (value, selected) => {
   if (!countProject) {
   const tasksTitleDiv = document.createElement('div');
   tasksTitleDiv.className = 'p-3';
@@ -28,22 +30,42 @@ const makeTaskSection = (value) => {
     <button type="button" class="pb-2 text-dark btn btn-light plus">
       <i class="fas fa-plus plus"></i>
     </button>
-  </div>
-
-  `
+  </div>`
 
   first.appendChild(tasksTitleDiv);
-
-  countProject = true;
+  tasksToDom(selected)
+   countProject = true;
   console.log(countProject)
   }
   else {
-    first.innerHTML='';
+    first.innerHTML = '';
+    tableArticle.innerHTML = '';
     countProject = false;
     console.log(countProject)
   }
 
 };
+
+const makeTaskSection = (value, selected) => {
+  first.innerHTML = '';
+  taskForm.innerHTML = '';
+  tableArticle.innerHTML = '';
+  const tasksTitleDiv = document.createElement('div');
+  tasksTitleDiv.className = 'p-3';
+  tasksTitleDiv.innerHTML = `
+  <h2 class='prjct text-center'>Project: ${value}</h2>
+  <div class=" d-flex justify-content-center plus">
+    <h4 class="taskHeadline mt-1 me-5 mt-3 text-center">Your tasks</h4>
+    <button type="button" class="pb-2 text-dark btn btn-light plus">
+      <i class="fas fa-plus plus"></i>
+    </button>
+  </div>`
+
+  first.appendChild(tasksTitleDiv);
+  tasksToDom(selected)
+   countProject = true;
+  console.log(countProject)
+}
 
 const  makeTaskForm = () => {
   // const taskForm = document.createElement('form');
@@ -78,4 +100,65 @@ const  makeTaskForm = () => {
 
 }
 
-export { makeTaskForm, makeTaskSection, Task }
+const tasksToDom = (selected) => {
+  const taskTable = document.createElement('table');
+  taskTable.setAttribute('id', 'tasksTable');
+  taskTable.classList = 'table';
+  tableArticle.appendChild(taskTable);
+  tasksTable.innerHTML = `
+  <thead class="table-dark">
+          <tr>
+            <th class='col-3 ps-3'>Title</th>
+            <th class='col-2'>Finished</th>
+            <th class='col-2'>Status</th>
+            <th class='col-2'>Details</th>
+            <th class='col-2'>Edit</th>
+            <th class='col-1 ps-3'>Delete</th>
+          </tr>
+        </thead>`
+
+        const taskBody = document.createElement('tbody');
+        taskBody.setAttribute('id', 'taskBody');
+        taskBody.className = 'ps-5';
+        tableArticle.appendChild(taskBody);
+  console.log(selected)
+  selected.forEach(function(task) {
+          taskBody.innerHTML += `
+          <tr>
+            <td class='col-3 ps-3'>${task.title}</td>
+            <td class='col-2'>${Flag(task.priority)}</td>
+            <td class='col-2'><button type='button' class="btn p-0 btn-light" id='statusBTN'>${Status(task.finished)}</button></td>
+            <td class='col-2'><button type='button' class="btn p-0 btn-light" data-bs-toggle="modal" data-bs-target="#detailsModal">
+              Details</button><td>
+              <td class='col-2'><button type='button' class='btn p-0 btn-light' id='editTaskBtn'><i class="fas fa-pen text-dark"></i></button></td>
+            <td class='col-1'><button type='button' class='btn p-0 btn-light' id='deleteTaskBtn'><i class="fas fa-trash text-dark"></i></button></td>
+
+          </tr>
+
+          <div class="modal fade" id="detailsModal" tabindex="-1" aria-labelledby="detailsModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="detailsModalLabel">${task.title}</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div> ${task.comment} </div>
+        <div> ${task.projectsN} </div>
+        <div> ${Flag(task.priority)}</div>
+        <div> ${Status(task.finished)} </div>
+        <div> ${task.deadline} </div>
+      </div>
+    </div>
+  </div>
+</div>`
+
+
+ });
+}
+
+
+
+
+
+export { makeTaskForm, makeTaskSectionOnClick, makeTaskSection, Task, tasksToDom }
