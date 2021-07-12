@@ -16,32 +16,42 @@ header {
 }
 
 #toDos {
-  margin-top: 8vh;
+  margin-top: 7vh;
 }
 
-#task-name {
-  width: 100%;
- border:none;
- height: 3rem;
-
+#taskForm {
+  position: relative;
 }
-input[type="date" i] {
+
+#task-name  {
+  width: 95%;
   border:none;
-  font-family: 'Lato', 'Font Awesome 5 Free';
+  height: 2rem;
+}
+
+#comment  {
+  width: 95%;
+  border:none;
+  height: 4rem;
 }
 
 #selectPriority {
+  position: absolute;
+  bottom: 7%;
+  right: 180px;
   border: none;
   font-family: 'Lato', 'Font Awesome 5 Free';
   border-color: white;
   width: auto;
 }
-
-#addCommentBtn {
+#datePicker {
+  position: absolute;
+  right: 2%;
+  z-index: 5;
+  bottom: 9%;
+  border: none;
   font-family: 'Lato', 'Font Awesome 5 Free';
-  background: white;
 }
-
 #one {
 
   color: red;
@@ -62,11 +72,3 @@ input[type="date" i] {
   color: greenyellow;
 }
 
-
-/* input#datePicker::-webkit-calendar-picker-indicator { display: none }
-
-input[type=date]::-webkit-inner-spin-button,
-input[type=date]::-webkit-outer-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
-} */
