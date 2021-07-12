@@ -1,23 +1,38 @@
 import { Project, projectToDom, projectsToDom,  deleteProject, checkProject } from './modules/projects';
-import { makeTaskForm, makeTaskSection } from './modules/tasks';
+import { makeTaskForm, makeTaskSection, Task } from './modules/tasks';
 
 // import { setProjects } from './modules/storage'
 const addForm = document.getElementById('addForm');
 const getName = document.getElementById('nameInput');
 const getDescription = document.getElementById('descriptionInput');
-const toDos = document.getElementById('toDos');
+const first = document.getElementById('first');
 
 export let myProjects = [];
 
+//initialize and strore projects
 if (localStorage.getItem('myProjects') !== null) {
   myProjects = JSON.parse(window.localStorage.getItem('myProjects'));
 }
-console.log(myProjects)
 
 function setProjects() {
   console.log("in setProjectssss")
   window.localStorage.setItem('myProjects', JSON.stringify(myProjects));
 }
+
+let currentProject = '';
+
+//initialize and store tasks
+export let myTasks = [];
+
+if (localStorage.getItem('myTasks') !== null) {
+  myTasks = JSON.parse(window.localStorage.getItem('myTasks'));
+}
+
+function setTasks() {
+  console.log("in setTasks")
+  window.localStorage.setItem('myTasks', JSON.stringify(myTasks));
+}
+
 
 document.addEventListener('DOMContentLoaded', projectsToDom());
 
@@ -115,18 +130,17 @@ projectManipulation.addEventListener('click', (e) => {
     projectsContainer.innerHTML = '',
     projectsToDom();
 
-  })
+    })
 }
 if (clicked.classList.contains('seeBtn')) {
 
-  console.log('in see');
-   makeTaskSection();
+   makeTaskSection(removeData);
  }
-
+ currentProject = removeData;
 });
 
 
-toDos.addEventListener('click', (e) => {
+first.addEventListener('click', (e) => {
    e.preventDefault();
 
    const clicked = e.target;
@@ -135,5 +149,32 @@ toDos.addEventListener('click', (e) => {
   console.log('here');
   makeTaskForm();
    }
-});
+  });
 
+ const taskForm = document.getElementById('taskForm');
+ taskForm.addEventListener('submit', (e) => {
+  e.preventDefault();
+  const clicked = e.target
+  const newTitle  = clicked[0].value;
+  const newComment = clicked[1].value;
+  const newPriority = clicked[2].value;
+  const newDate = clicked[3].value;
+
+  confirm = true;
+
+  if (!newTitle) {
+    alert("Title must not be empty");
+    confirm = false
+    return;
+  }
+
+  if (confirm = false) {
+    return;
+  }
+
+  const newTask = new Task(newTitle, currentProject, newComment, newPriority, newDate);
+  console.log(newTask);
+  myTasks.push(newTask);
+  console.log(myTasks);
+  setTasks();
+ })
