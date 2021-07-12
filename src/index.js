@@ -91,8 +91,7 @@ projectManipulation.addEventListener('click', (e) => {
 
   if (clicked.classList.contains('editProjectBtn')) {
 
-    console.log('in edit');
-    let project = myProjects.find(x => x.name == currentProject);
+      let project = myProjects.find(x => x.name == currentProject);
   console.log(project);
 
   getName.value = project.name;
@@ -177,12 +176,30 @@ first.addEventListener('click', (e) => {
   if (confirm = false) {
     return;
   }
+  taskID+=1;
 
-  const newTask = new Task(newTitle, currentProject, newComment, newPriority, newDate);
+  const newTask = new Task(taskID, newTitle, currentProject, newComment, newPriority, newDate);
   console.log(newTask);
   myTasks.push(newTask);
   setTasks();
   let selectedTasks = myTasks.filter(task => task.projectsN === currentProject);
 
   makeTaskSection(currentProject, selectedTasks);
- })
+ });
+
+
+ tableArticle.addEventListener('click', (e) => {
+  e.preventDefault();
+  const clicked = e.target;
+
+  let index = parseInt(clicked.closest('tr').firstElementChild.textContent) - 1;
+
+  if(clicked.classList.contains('deleteTaskBtn')) {
+    clicked.closest('tr').remove();
+    myTasks.splice(index, 1);
+    setTasks();
+  }
+  if(clicked.classList.contains('deleteTaskBtn')) {
+
+  }
+ });

@@ -108,11 +108,12 @@ const tasksToDom = (selected) => {
   tasksTable.innerHTML = `
   <thead class="table-dark">
           <tr>
+            <th class='col-1 ps-3'>#</th>
             <th class='col-3 ps-3'>Title</th>
             <th class='col-2'>Finished</th>
             <th class='col-2'>Status</th>
             <th class='col-2'>Details</th>
-            <th class='col-2'>Edit</th>
+            <th class='col-1'>Edit</th>
             <th class='col-1 ps-3'>Delete</th>
           </tr>
         </thead>`
@@ -123,15 +124,17 @@ const tasksToDom = (selected) => {
         tableArticle.appendChild(taskBody);
   console.log(selected)
   selected.forEach(function(task) {
+    let index = myTasks.indexOf(task) + 1;
           taskBody.innerHTML += `
           <tr>
-            <td class='col-3 ps-3'>${task.title}</td>
+            <th scope="row" class='col-1 ps-3'>${index}</th>
+            <td class='col-3'>${task.title}</td>
             <td class='col-2'>${Flag(task.priority)}</td>
-            <td class='col-2'><button type='button' class="btn p-0 btn-light" id='statusBTN'>${Status(task.finished)}</button></td>
+            <td class='col-2'><button type='button' class="statusBTN btn p-0 btn-light">${Status(task.finished)}</button></td>
             <td class='col-2'><button type='button' class="btn p-0 btn-light" data-bs-toggle="modal" data-bs-target="#detailsModal">
               Details</button><td>
-              <td class='col-2'><button type='button' class='btn p-0 btn-light' id='editTaskBtn'><i class="fas fa-pen text-dark"></i></button></td>
-            <td class='col-1'><button type='button' class='btn p-0 btn-light' id='deleteTaskBtn'><i class="fas fa-trash text-dark"></i></button></td>
+              <td class='col-1'><button type='button' class='editTaskBtn btn p-0 btn-light'><i class="fas fa-pen text-dark editTaskBtn"></i></button></td>
+            <td class='col-1'><button type='button' class='deleteTaskBtn btn p-0 btn-light'><i class="fas fa-trash text-dark deleteTaskBtn"></i></button></td>
 
           </tr>
 
