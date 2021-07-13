@@ -1,7 +1,12 @@
-import { Project, projectToDom, projectsToDom,  deleteProject, checkProject } from './modules/projects';
-import { makeTaskForm, makeTaskSectionOnClick, changeStatus, Task, makeTaskSection, makeEditForm, tasksToDom, deleteAllTasks } from './modules/tasks';
+import { setDate } from './modules/helpers';
+// eslint-disable-next-line
+import {
+  Project, projectsToDom, deleteProject, checkProject,
+} from './modules/projects';
+// eslint-disable-next-line
+import { makeTaskForm, makeTaskSecOnClck, changeStatus, Task, makeTaskSection, makeEditForm, deleteAllTasks, countForm, makeToday,
+} from './modules/tasks';
 
-// import { setProjects } from './modules/storage'
 const addForm = document.getElementById('addForm');
 const getName = document.getElementById('nameInput');
 const getDescription = document.getElementById('descriptionInput');
@@ -9,22 +14,25 @@ const first = document.getElementById('first');
 const projectsContainer = document.getElementById('projectsContainer');
 const tableArticle = document.getElementById('tableArticle');
 const editForm = document.getElementById('editForm');
+const editTaskForm = document.getElementById('editTaskForm');
 
+// eslint-disable-next-line
 export let myProjects = [];
 
-//initialize and strore projects
+// initialize and strore projects
 if (localStorage.getItem('myProjects') !== null) {
   myProjects = JSON.parse(window.localStorage.getItem('myProjects'));
 }
 
 function setProjects() {
-  console.log("in setProjectssss")
+  console.log('in setProjectssss');
   window.localStorage.setItem('myProjects', JSON.stringify(myProjects));
 }
 
 let currentProject = '';
 
-//initialize and store tasks
+// initialize and store tasks
+// eslint-disable-next-line
 export let myTasks = [];
 
 if (localStorage.getItem('myTasks') !== null) {
@@ -32,19 +40,19 @@ if (localStorage.getItem('myTasks') !== null) {
 }
 
 function setTasks() {
-  console.log("in setTasks")
+  console.log('in setTasks');
   window.localStorage.setItem('myTasks', JSON.stringify(myTasks));
 }
 
-
-document.addEventListener('DOMContentLoaded', projectsToDom());
-
+// initialize page
+document.addEventListener('DOMContentLoaded', projectsToDom(), makeToday());
+// eslint-disable-next-line
 addForm.addEventListener('submit', (e) => {
   e.preventDefault();
 
-const newName = addForm[0].value;
+  const newName = addForm[0].value;
 
-const newDescription = addForm[1].value;
+  const newDescription = addForm[1].value;
 
   let confirmation = true;
 
@@ -54,7 +62,7 @@ const newDescription = addForm[1].value;
   }
 
   if (checkProject(newName)) {
-    alert("Project with same name already exists");
+    alert('Project with same name already exists');
     confirmation = false;
   }
 
@@ -62,26 +70,21 @@ const newDescription = addForm[1].value;
     return false;
   }
 
-  console.log("heree")
-
   const newProject = new Project(newName, newDescription);
-  console.log(newProject);
   myProjects.push(newProject);
   setProjects(myProjects);
-  projectsContainer.innerHTML = ''
+  projectsContainer.innerHTML = '';
   projectsToDom();
-
-
 });
 
 const projectManipulation = document.getElementById('projectsContainer');
 projectManipulation.addEventListener('click', (e) => {
   e.preventDefault();
 
-  const clicked = e.target
+  const clicked = e.target;
 
   currentProject = clicked.closest('article').firstElementChild.textContent;
-  let selectedTasks = myTasks.filter(task => task.projectsN === currentProject);
+  const selectedTasks = myTasks.filter((task) => task.projectsN === currentProject);
 
   if (clicked.classList.contains('delProjectBtn')) {
     alert('No kidding?!');
@@ -93,145 +96,168 @@ projectManipulation.addEventListener('click', (e) => {
   }
 
   if (clicked.classList.contains('editProjectBtn')) {
+    const project = myProjects.find((x) => x.name === currentProject);
 
-      let project = myProjects.find(x => x.name == currentProject);
-  console.log(project);
+    getName.value = project.name;
 
-  getName.value = project.name;
-  console.log(getName);
-  getDescription.value = project.description;
-  console.log(getDescription.value);
+    getDescription.value = project.description;
 
-  editForm.addEventListener('submit', (e) => {
-    e.preventDefault();
+    editForm.addEventListener('submit', (e) => {
+      e.preventDefault();
 
-    const edited = new Project(editForm[0].value, editForm[1].value)
-    console.log(edited);
+      const edited = new Project(editForm[0].value, editForm[1].value);
 
-    let confirmation = true;
+      let confirmation = true;
 
-    if (edited.name == project.name && edited.description == project.description) {
-      alert("You haven't change anything");
-      confirmation = false;
-      return;
-    }
+      if (edited.name === project.name && edited.description === project.description) {
+        alert("You haven't change anything");
+        confirmation = false;
+        return;
+      }
 
-    const checkData = edited.name
+      const checkData = edited.name;
 
-    if (checkProject(checkData) && edited.name != project.name) {
-      alert("Project with same name already exists");
-      console.log('herre');
-      confirmation = false;
-    }
+      if (checkProject(checkData) && edited.name !== project.name) {
+        alert('Project with same name already exists');
 
-    if (!confirmation) {
-      return;
-    }
+        confirmation = false;
+      }
 
-    project.name = edited.name;
-    project.description = edited.description;
+      if (!confirmation) {
+        return;
+      }
 
-    setProjects();
-    projectsContainer.innerHTML = '';
-    projectsToDom();
+      project.name = edited.name;
+      project.description = edited.description;
 
-    })
-}
-if (clicked.classList.contains('seeBtn')) {
-
-
-   makeTaskSectionOnClick(currentProject, selectedTasks);
-
-
- }
- currentProject = currentProject;
+      setProjects();
+      projectsContainer.innerHTML = '';
+      projectsToDom();
+    });
+  }
+  if (clicked.classList.contains('seeBtn')) {
+    makeTaskSecOnClck(currentProject, selectedTasks);
+  }
 });
 
-
 first.addEventListener('click', (e) => {
-   e.preventDefault();
-
-   const clicked = e.target;
-   console.log('here');
-   if (clicked.classList.contains('plus')) {
-  console.log('here');
-  makeTaskForm();
-   }
-  });
-
- const taskForm = document.getElementById('taskForm');
- taskForm.addEventListener('submit', (e) => {
   e.preventDefault();
-  const clicked = e.target
-  const newTitle  = clicked[0].value;
-  const newComment = clicked[1].value;
-  const newPriority = clicked[2].value;
-  const newDate = clicked[3].value;
 
-  confirm = true;
+  const clicked = e.target;
+  if (clicked.classList.contains('plus')) {
+    makeTaskForm();
+  }
+});
 
-  if (!newTitle) {
-    alert("Title must not be empty");
-    confirm = false
+const taskForm = document.getElementById('taskForm');
+taskForm.addEventListener('click', (e) => {
+  e.preventDefault();
+
+  const clicked = e.target;
+
+  if (clicked.classList.contains('dismissTask')) {
+    taskForm.innerHTML = '';
+    countForm = false;
     return;
   }
 
-  if (confirm = false) {
-    return;
+  if (clicked.classList.contains('confirmTask')) {
+    const newTitle = taskForm[0].value;
+    const newComment = taskForm[1].value;
+    const newPriority = taskForm[2].value;
+    let newDate = taskForm[3].value;
+
+    let confirm = true;
+
+    if (!newTitle) {
+      alert('Title must not be empty');
+      confirm = false;
+      return;
+    }
+
+    if (confirm === false) {
+      // eslint-disable-next-line
+      return false;
+    }
+
+    if (!newDate) {
+      newDate = setDate();
+    }
+
+    const newTask = new Task(newTitle, currentProject, newComment, newPriority, newDate);
+
+    myTasks.push(newTask);
+    setTasks();
+    const selectedTasks = myTasks.filter((task) => task.projectsN === currentProject);
+
+    makeTaskSection(currentProject, selectedTasks);
+    makeToday();
   }
+});
 
-  const newTask = new Task(newTitle, currentProject, newComment, newPriority, newDate);
-  console.log(newTask);
-  myTasks.push(newTask);
-  setTasks();
-  let selectedTasks = myTasks.filter(task => task.projectsN === currentProject);
-
-  makeTaskSection(currentProject, selectedTasks);
- });
-
-
- tableArticle.addEventListener('click', (e) => {
+tableArticle.addEventListener('click', (e) => {
   e.preventDefault();
   const clicked = e.target;
 
-  let index = parseInt(clicked.closest('tr').firstElementChild.textContent) - 1;
+  const index = parseInt(clicked.closest('tr').firstElementChild.textContent) - 1;
+  console.log("this", index)
 
-  if(clicked.classList.contains('deleteTaskBtn')) {
+  if (clicked.classList.contains('deleteTaskBtn')) {
+    alert('Are you sure?');
     clicked.closest('tr').remove();
     myTasks.splice(index, 1);
     setTasks();
+    makeToday();
   }
 
-  if(clicked.classList.contains('statusBTN')) {
-    console.log("in finished");
+  if (clicked.classList.contains('statusBTN')) {
     changeStatus(index);
     setTasks();
-    let selectedTasks = myTasks.filter(task => task.projectsN === currentProject);
+    const selectedTasks = myTasks.filter((task) => task.projectsN === currentProject);
     makeTaskSection(currentProject, selectedTasks);
   }
 
-  if(clicked.classList.contains('editTaskBtn')) {
+  if (clicked.classList.contains('editTaskBtn')) {
     const taskToEdit = myTasks[index];
     makeEditForm(taskToEdit);
-    editForm.addEventListener('click', (e) => {
+    editTaskForm.addEventListener('click', (e) => {
       e.preventDefault();
-      let clicked = e.target;
+      const clicked = e.target;
       if (clicked.classList.contains('dismissEditTask')) {
-        editForm.innerHTML = '';
+        editTaskForm.innerHTML = '';
       }
       if (clicked.classList.contains('confirmEditTask')) {
-        console.log(myTasks)
+        // eslint-disable-next-line
 
-        const editedTask = new Task(editForm[0].value, currentProject, editForm[1].value, editForm[2].value, editForm[3].value);
-        console.log(editedTask);
+        const editTitle = editTaskForm[0].value;
+        const editComment = editTaskForm[1].value;
+        const editPriority = editTaskForm[2].value;
+        let editDate = editTaskForm[3].value;
 
+        let confirm = true;
+
+        if (!editTitle) {
+          alert('Title must not be empty');
+          confirm = false;
+          return;
+        }
+
+        if (confirm === false) {
+          // eslint-disable-next-line
+          return false;
+        }
+
+        if (!editDate) {
+          editDate = setDate();
+        }
+
+        const editedTask = new Task(editTitle, currentProject, editComment, editPriority, editDate);
         myTasks.splice(index, 1, editedTask);
-        let selectedTasks = myTasks.filter(task => task.projectsN === currentProject);
+        setTasks();
+        const selectedTasks = myTasks.filter((task) => task.projectsN === currentProject);
         makeTaskSection(currentProject, selectedTasks);
-        setTasks()
+        makeToday();
       }
-      console.log(myTasks);
-
     });
   }
- });
+});

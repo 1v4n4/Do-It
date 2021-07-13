@@ -3,7 +3,6 @@ header {
   width: 100%;
   position: fixed;
   top: 0;
-
 }
 
 .logo {
@@ -20,25 +19,25 @@ header {
 }
 
 #taskForm,
-#editForm {
+#editTaskForm {
   position: relative;
 }
 
 #task-name,
-#edit-task-name  {
+#edit-task-name {
   width: 95%;
-  border:none;
+  border: none;
   height: 2rem;
 }
 
-textarea  {
+textarea {
   width: 95%;
-  border:none;
+  border: none;
   height: 4rem;
 }
 
 #selectPriority,
-#selectPriority1  {
+#selectPriority1 {
   position: absolute;
   bottom: 7%;
   right: 180px;
@@ -49,7 +48,7 @@ textarea  {
 }
 
 #datePicker,
-#datePicker1  {
+#datePicker1 {
   position: absolute;
   right: 2%;
   z-index: 5;
@@ -57,22 +56,34 @@ textarea  {
   border: none;
   font-family: 'Lato', 'Font Awesome 5 Free';
 }
-.one {
 
+.one {
   color: red;
 }
 
 .two {
-
   color: yellow;
 }
 
 .three {
-
   color: blue;
 }
 
 .four {
-
   color: greenyellow;
+}
+
+.today {
+  min-height: 100vh;
+  padding-top: 16vh;
+}
+
+.card {
+  width: 18rem;
+}
+
+footer {
+  position: fixed;
+  bottom: 0;
+  right: 0;
 }
