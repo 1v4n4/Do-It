@@ -14,6 +14,7 @@ function Task(title, projectsN, comment, priority, deadline) {
 const toDos = document.getElementById('toDos');
 const first = document.getElementById('first');
 const taskForm = document.getElementById('taskForm');
+const editForm = document.getElementById('editForm');
 const tableArticle = document.getElementById('tableArticle');
 
 let countProject = false;
@@ -77,10 +78,10 @@ const  makeTaskForm = () => {
     <textarea  id='comment' class='my-2' rows='3' maxlength='150' placeholder='Add comment here'></textarea>
     <select class='form-select me-4' id='selectPriority' aria-label='Default select example'>
             <option selected value='1'>Select priority level</option>
-            <option id='one' value='1'>&#xf024; Priority 1</option>
-            <option id='two' value='2'>&#xf024; Priority 2</option>
-            <option id='three' value='3'>&#xf024; Priority 3</option>
-            <option id='four' value='4'>&#xf024; Priority 4</option>
+            <option class='one' value='1'>&#xf024; Priority 1</option>
+            <option class='two' value='2'>&#xf024; Priority 2</option>
+            <option class='three' value='3'>&#xf024; Priority 3</option>
+            <option class='four' value='4'>&#xf024; Priority 4</option>
     </select>
     <input type="date" max='2110-13-13' id='datePicker'>
     <button type='submit' class='btn btn-secondary' id='confirmTask'>Create task</button>
@@ -108,7 +109,7 @@ const tasksToDom = (selected) => {
   tasksTable.innerHTML = `
   <thead class="table-dark">
           <tr>
-            <th class='col-1 ps-3'>#</th>
+            <th class='col-1 ps-3'></th>
             <th class='col-3 ps-3'>Title</th>
             <th class='col-2'>Finished</th>
             <th class='col-2'>Status</th>
@@ -127,14 +128,14 @@ const tasksToDom = (selected) => {
     let index = myTasks.indexOf(task) + 1;
           taskBody.innerHTML += `
           <tr>
-            <th scope="row" class='col-1 ps-3'>${index}</th>
+            <th scope="row" class='col-1 '>${index}</th>
             <td class='col-3'>${task.title}</td>
-            <td class='col-2'>${Flag(task.priority)}</td>
-            <td class='col-2'><button type='button' class="statusBTN btn p-0 btn-light">${Status(task.finished)}</button></td>
-            <td class='col-2'><button type='button' class="btn p-0 btn-light" data-bs-toggle="modal" data-bs-target="#detailsModal">
+            <td class='col-2 ps-4'>${Flag(task.priority)}</td>
+            <td class='col-2 ps-3'><button type='button' class="statusBTN btn p-0 btn-light">${Status(task.finished)}</button></td>
+            <td class='col-2 ps-3'><button type='button' class="btn p-0 btn-light" data-bs-toggle="modal" data-bs-target="#detailsModal">
               Details</button><td>
-              <td class='col-1'><button type='button' class='editTaskBtn btn p-0 btn-light'><i class="fas fa-pen text-dark editTaskBtn"></i></button></td>
-            <td class='col-1'><button type='button' class='deleteTaskBtn btn p-0 btn-light'><i class="fas fa-trash text-dark deleteTaskBtn"></i></button></td>
+              <td class='col-1 ps-3'><button type='button' class='editTaskBtn btn p-0 btn-light'><i class="fas fa-pen text-dark editTaskBtn"></i></button></td>
+            <td class='col-1 ps-3'><button type='button' class='deleteTaskBtn btn p-0 btn-light'><i class="fas fa-trash text-dark deleteTaskBtn"></i></button></td>
 
           </tr>
 
@@ -178,4 +179,23 @@ const deleteAllTasks = (currentProject) => {
   });
 };
 
-export { makeTaskForm, makeTaskSectionOnClick, makeTaskSection, Task, tasksToDom, changeStatus, deleteAllTasks }
+const makeEditForm = (task) => {
+    editForm.innerHTML = `
+      <input type='text' class=' my-2' name='EdiTaskName' id='edit-task-name' value='${task.title}'>
+      <textarea  id='editComment' class='my-2' rows='3' maxlength='150'> ${task.comment}</textarea>
+      <select class='form-select me-4' id='selectPriority1' aria-label='Default select example'>
+              <option selected value='1'>Priority ${task.priority}</option>
+              <option class='one' value='1'>&#xf024; Priority 1</option>
+              <option class='two' value='2'>&#xf024; Priority 2</option>
+              <option class='three' value='3'>&#xf024; Priority 3</option>
+              <option class='four' value='4'>&#xf024; Priority 4</option>
+      </select>
+      <input type="date" max='2110-13-13' id='datePicker1' value='${task.date}'>
+      <button type='submit' class='confirmEditTask btn btn-secondary' id='confirmEditTask'>Edit task</button>
+      <button type='button' class='dismissEditTask btn btn-light m-3' id='dismissEditTask'>Dismiss</button>
+    `;
+
+    document.getElementById("datePicker1").setAttribute("min", setDate());
+};
+
+export { makeTaskForm, makeTaskSectionOnClick, makeTaskSection, Task, tasksToDom, changeStatus, makeEditForm, deleteAllTasks }

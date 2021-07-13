@@ -1,5 +1,5 @@
 import { Project, projectToDom, projectsToDom,  deleteProject, checkProject } from './modules/projects';
-import { makeTaskForm, makeTaskSectionOnClick, changeStatus, Task, makeTaskSection, tasksToDom, deleteAllTasks } from './modules/tasks';
+import { makeTaskForm, makeTaskSectionOnClick, changeStatus, Task, makeTaskSection, makeEditForm, tasksToDom, deleteAllTasks } from './modules/tasks';
 
 // import { setProjects } from './modules/storage'
 const addForm = document.getElementById('addForm');
@@ -8,6 +8,7 @@ const getDescription = document.getElementById('descriptionInput');
 const first = document.getElementById('first');
 const projectsContainer = document.getElementById('projectsContainer');
 const tableArticle = document.getElementById('tableArticle');
+const editForm = document.getElementById('editForm');
 
 export let myProjects = [];
 
@@ -200,11 +201,37 @@ first.addEventListener('click', (e) => {
     myTasks.splice(index, 1);
     setTasks();
   }
+
   if(clicked.classList.contains('statusBTN')) {
     console.log("in finished");
     changeStatus(index);
     setTasks();
     let selectedTasks = myTasks.filter(task => task.projectsN === currentProject);
     makeTaskSection(currentProject, selectedTasks);
+  }
+
+  if(clicked.classList.contains('editTaskBtn')) {
+    const taskToEdit = myTasks[index];
+    makeEditForm(taskToEdit);
+    editForm.addEventListener('click', (e) => {
+      e.preventDefault();
+      let clicked = e.target;
+      if (clicked.classList.contains('dismissEditTask')) {
+        editForm.innerHTML = '';
+      }
+      if (clicked.classList.contains('confirmEditTask')) {
+        console.log(myTasks)
+
+        const editedTask = new Task(editForm[0].value, currentProject, editForm[1].value, editForm[2].value, editForm[3].value);
+        console.log(editedTask);
+
+        myTasks.splice(index, 1, editedTask);
+        let selectedTasks = myTasks.filter(task => task.projectsN === currentProject);
+        makeTaskSection(currentProject, selectedTasks);
+        setTasks()
+      }
+      console.log(myTasks);
+
+    });
   }
  });

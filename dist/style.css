@@ -19,23 +19,26 @@ header {
   margin-top: 7vh;
 }
 
-#taskForm {
+#taskForm,
+#editForm {
   position: relative;
 }
 
-#task-name  {
+#task-name,
+#edit-task-name  {
   width: 95%;
   border:none;
   height: 2rem;
 }
 
-#comment  {
+textarea  {
   width: 95%;
   border:none;
   height: 4rem;
 }
 
-#selectPriority {
+#selectPriority,
+#selectPriority1  {
   position: absolute;
   bottom: 7%;
   right: 180px;
@@ -44,7 +47,9 @@ header {
   border-color: white;
   width: auto;
 }
-#datePicker {
+
+#datePicker,
+#datePicker1  {
   position: absolute;
   right: 2%;
   z-index: 5;
@@ -52,23 +57,22 @@ header {
   border: none;
   font-family: 'Lato', 'Font Awesome 5 Free';
 }
-#one {
+.one {
 
   color: red;
 }
 
-#two {
+.two {
 
   color: yellow;
 }
 
-#three {
+.three {
 
   color: blue;
 }
 
-#four {
+.four {
 
   color: greenyellow;
 }
-
