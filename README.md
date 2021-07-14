@@ -4,7 +4,7 @@ Do It is an application that helps users to organize their lives. They can creat
 Tasks they have priority and status tags, as well as deadlines. Status can be changed in the task's table, the rest of its content can be edited or whole tasks can be deleted. Users can add comments if they want.
 Users can see today's pending tasks in a separate section.
 
-[Screenshot](./dist/images/ScreenshotTodo.png)
+![Screenshot](./dist/images/ScreenshotTodo.png)
 
 [Check Do It](https://1v4n4.github.io/to-do-list/)
 
