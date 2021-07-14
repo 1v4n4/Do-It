@@ -12,7 +12,7 @@ const setDate = () => {
   today = `${yyyy}-${mm}-${dd}`;
   return today;
 };
-
+// eslint-disable-next-line
 const Flag = (task) => {
   if (task === '1') return '<i class="fa fa-flag text-danger"></i>';
   if (task === '2') return '<i class="fa fa-flag text-warning"></i>';

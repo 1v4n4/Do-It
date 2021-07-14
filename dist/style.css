@@ -3,6 +3,7 @@ header {
   width: 100%;
   position: fixed;
   top: 0;
+  z-index: 17;
 }
 
 .logo {
@@ -76,6 +77,7 @@ textarea {
 .today {
   min-height: 100vh;
   padding-top: 16vh;
+  margin-bottom: 4rem;
 }
 
 .card {

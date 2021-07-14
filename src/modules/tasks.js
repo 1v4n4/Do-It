@@ -157,14 +157,11 @@ const changeStatus = (index) => {
 };
 
 const deleteAllTasks = (currentProject) => {
-  myTasks.forEach((task) => {
-    if (task.projectsN === currentProject) {
-      const index = myTasks.indexOf(task);
-      myTasks.splice(index, 1);
-      first.innerHTML = '';
-      tableArticle.innerHTML = '';
-    }
-  });
+  const arr = myTasks.filter((task) => task.projectsN !== currentProject);
+  myTasks = arr;
+  first.innerHTML = '';
+  tableArticle.innerHTML = '';
+  todayContainer.innerHTML = '';
 };
 
 const makeEditForm = (task) => {
@@ -190,7 +187,7 @@ const makeToday = () => {
   todayContainer.innerHTML = '';
   const todayTasks = myTasks.filter((task) => task.deadline === setDate());
   todayTasks.forEach((task) => {
-  todayContainer.innerHTML += `
+    todayContainer.innerHTML += `
   <div class="card mx-auto mt-3 bg-light">
             <div class="card-body bg-light">
               <h5 class="card-title">${task.title}</h5>
@@ -205,7 +202,6 @@ const makeToday = () => {
 
           </div>`;
   });
-
 };
 
 export {

@@ -19,13 +19,11 @@ const editTaskForm = document.getElementById('editTaskForm');
 // eslint-disable-next-line
 export let myProjects = [];
 
-// initialize and strore projects
 if (localStorage.getItem('myProjects') !== null) {
   myProjects = JSON.parse(window.localStorage.getItem('myProjects'));
 }
 
 function setProjects() {
-  console.log('in setProjectssss');
   window.localStorage.setItem('myProjects', JSON.stringify(myProjects));
 }
 
@@ -70,7 +68,7 @@ addForm.addEventListener('submit', (e) => {
 
   const newProject = new Project(newName, newDescription);
   myProjects.push(newProject);
-  setProjects(myProjects);
+  setProjects();
   projectsContainer.innerHTML = '';
   projectsToDom();
   addForm.reset();
@@ -92,6 +90,7 @@ projectManipulation.addEventListener('click', (e) => {
     deleteAllTasks(currentProject);
     setProjects();
     setTasks();
+    makeToday();
   }
 
   if (clicked.classList.contains('editProjectBtn')) {
@@ -199,9 +198,9 @@ taskForm.addEventListener('click', (e) => {
 tableArticle.addEventListener('click', (e) => {
   e.preventDefault();
   const clicked = e.target;
-
+  // eslint-disable-next-line
   const index = parseInt(clicked.closest('tr').firstElementChild.textContent) - 1;
-  console.log("this", index)
+  console.log('this', index);
 
   if (clicked.classList.contains('deleteTaskBtn')) {
     alert('Are you sure?');
