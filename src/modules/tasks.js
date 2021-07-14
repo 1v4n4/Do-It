@@ -185,6 +185,7 @@ const makeEditForm = (task) => {
 
 const makeToday = () => {
   todayContainer.innerHTML = '';
+  // eslint-disable-next-line
   const todayTasks = myTasks.filter((task) => task.deadline === setDate() && task.finished === false);
   todayTasks.forEach((task) => {
     todayContainer.innerHTML += `
