@@ -16,6 +16,41 @@ const tableArticle = document.getElementById('tableArticle');
 const editForm = document.getElementById('editForm');
 const editTaskForm = document.getElementById('editTaskForm');
 
+const defaultTasks = [
+  {
+    title: "My important project's very important task",
+    projectsN: 'My important project',
+    comment: 'No comment',
+    priority: '1',
+    deadline: '2021-07-14',
+    finished: false,
+  },
+  {
+    title: "My important project's important task",
+    projectsN: 'My important project',
+    comment: '',
+    priority: '2',
+    deadline: '2021-07-14',
+    finished: false,
+  },
+  {
+    title: "My important project's less important task",
+    projectsN: 'My important project',
+    comment: '',
+    priority: '3',
+    deadline: '2021-07-23',
+    finished: false,
+  },
+  {
+    title: "My important project's least important task",
+    projectsN: 'My important project',
+    comment: '',
+    priority: '4',
+    deadline: '2021-07-31',
+    finished: false,
+  },
+];
+
 // eslint-disable-next-line
 export let myProjects = [];
 
@@ -37,7 +72,6 @@ if (localStorage.getItem('myTasks') !== null) {
 }
 
 function setTasks() {
-  console.log('in setTasks');
   window.localStorage.setItem('myTasks', JSON.stringify(myTasks));
 }
 
@@ -135,7 +169,11 @@ projectManipulation.addEventListener('click', (e) => {
     });
   }
   if (clicked.classList.contains('seeBtn')) {
-    makeTaskSecOnClck(currentProject, selectedTasks);
+    if (myProjects.length === 0) {
+      makeTaskSecOnClck('My important project', defaultTasks);
+    } else {
+      makeTaskSecOnClck(currentProject, selectedTasks);
+    }
   }
 });
 
@@ -200,7 +238,6 @@ tableArticle.addEventListener('click', (e) => {
   const clicked = e.target;
   // eslint-disable-next-line
   const index = parseInt(clicked.closest('tr').firstElementChild.textContent) - 1;
-  console.log('this', index);
 
   if (clicked.classList.contains('deleteTaskBtn')) {
     alert('Are you sure?');
@@ -258,7 +295,7 @@ tableArticle.addEventListener('click', (e) => {
         const selectedTasks = myTasks.filter((task) => task.projectsN === currentProject);
         makeTaskSection(currentProject, selectedTasks);
         makeToday();
-        taskForm.reset();
+        editTaskForm.reset();
       }
     });
   }

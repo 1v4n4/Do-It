@@ -124,9 +124,6 @@ const makeTaskSection = (value, selected) => {
 };
 
 const makeTaskForm = () => {
-  // const taskForm = document.createElement('form');
-  // taskForm.className = "taskForm border border-dark px-2 mx-5 ";
-  // taskForm.setAttribute('id', 'taskForm');
   if (!countForm) {
     taskForm.innerHTML = `
     <input type='text' class=' my-2' name='taskName' id='task-name' placeholder='Add title here'>

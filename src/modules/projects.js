@@ -5,7 +5,6 @@ const projectsContainer = document.getElementById('projectsContainer');
 
 function Project(name, description) {
   this.name = name;
-
   this.description = description;
 }
 
@@ -63,7 +62,12 @@ const projectToDom = (project) => {
 };
 
 const projectsToDom = () => {
-  myProjects.forEach((project) => projectToDom(project));
+  if (myProjects.length === 0) {
+    const project0 = new Project('My important project', 'My important project\'s description');
+    projectToDom(project0);
+  } else {
+    myProjects.forEach((project) => projectToDom(project));
+  }
 };
 
 const deleteProject = (arr, value) => {
