@@ -27,7 +27,7 @@ Users can see today's pending tasks in a separate section.
   Run `npm run` start in Terminal to start the server and look at the result in localhost:8080
 
 ## Author
-👤 **Ivana Novaković-Leković**
+**Ivana Novaković-Leković**
 
 - GitHub: [@githubhandle](https://github.com/1v4n4)
 - Twitter: [@twitterhandle](https://twitter.com/codeIv1)
