@@ -40,17 +40,17 @@ const projectToDom = (project) => {
 
   const delProjectBtn = document.createElement('button');
   delProjectBtn.className = 'delProjectBtn btn btn-light border-0 bg-secondary';
-  delProjectBtn.innerHTML = '<i class="delProjectBtn fas fa-times text-dark"></i>';
+  delProjectBtn.innerHTML = '<i class="delProjectBtn fa fa-times text-dark"></i>';
 
   const editProjectBtn = document.createElement('button');
   editProjectBtn.className = 'editProjectBtn btn btn-light border-0 bg-secondary';
   editProjectBtn.setAttribute('data-bs-toggle', 'modal');
   editProjectBtn.setAttribute('data-bs-target', '#exampleModal1');
-  editProjectBtn.innerHTML = '<i class="editProjectBtn fas fa-align-right text-dark"></i>';
+  editProjectBtn.innerHTML = '<i class="editProjectBtn fa fa-align-right text-dark"></i>';
 
   const seeBtn = document.createElement('button');
   seeBtn.className = 'seeBtn btn btn-light border-0 bg-secondary';
-  seeBtn.innerHTML = '<i class="seeBtn fas fa-chevron-right text-dark">';
+  seeBtn.innerHTML = '<i class="seeBtn fa fa-chevron-right text-dark">';
 
   const seeDiv = document.createElement('div');
   seeDiv.className = 'd-flex me-5 justify-content-around';

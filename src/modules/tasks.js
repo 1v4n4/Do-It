@@ -55,8 +55,8 @@ const tasksToDom = (selected) => {
             <td class='col-2 ps-3'><button type='button' class="statusBTN btn p-0 btn-light">${Status(task.finished)}</button></td>
             <td class='col-2 ps-3'><button type='button' class="btn p-0 btn-light" data-bs-toggle="modal" data-bs-target="#Modal${index}">
               Details</button><td>
-              <td class='col-1 ps-3'><button type='button' class='editTaskBtn btn p-0 btn-light'><i class="fas fa-pen text-dark editTaskBtn"></i></button></td>
-            <td class='col-1 ps-3'><button type='button' class='deleteTaskBtn btn p-0 btn-light'><i class="fas fa-trash text-dark deleteTaskBtn"></i></button></td>
+              <td class='col-1 ps-3'><button type='button' class='editTaskBtn btn p-0 btn-light'><i class="fa fa-wrench text-dark editTaskBtn"></i></button></td>
+            <td class='col-1 ps-3'><button type='button' class='deleteTaskBtn btn p-0 btn-light'><i class="fa fa-trash text-dark deleteTaskBtn"></i></button></td>
 
           </tr>
 
@@ -89,7 +89,7 @@ const makeTaskSecOnClck = (value, selected) => {
   <div class=" d-flex justify-content-center plus">
     <h4 class="taskHeadline mt-1 me-5 mt-3 text-center">Tasks</h4>
     <button type="button" class="pb-2 text-dark btn btn-light plus">
-      <i class="fas fa-plus plus"></i>
+      <i class="fa fa-plus plus"></i>
     </button>
   </div>`;
 
@@ -114,7 +114,7 @@ const makeTaskSection = (value, selected) => {
   <div class=" d-flex justify-content-center plus">
     <h4 class="taskHeadline mt-1 me-5 mt-3 text-center">Tasks</h4>
     <button type="button" class="pb-2 text-dark btn btn-light plus">
-      <i class="fas fa-plus plus"></i>
+      <i class="fa fa-plus plus"></i>
     </button>
   </div>`;
 

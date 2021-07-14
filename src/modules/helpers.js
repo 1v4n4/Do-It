@@ -14,13 +14,13 @@ const setDate = () => {
 };
 
 const Flag = (task) => {
-  if (task === '1') return '<i class="fas fa-flag text-danger"></i>';
-  if (task === '2') return '<i class="fas fa-flag text-warning"></i>';
-  if (task === '3') return '<i class="fas fa-flag text-info"></i>';
-  if (task === '4') return '<i class="fas fa-flag text-success"></i>';
+  if (task === '1') return '<i class="fa fa-flag text-danger"></i>';
+  if (task === '2') return '<i class="fa fa-flag text-warning"></i>';
+  if (task === '3') return '<i class="fa fa-flag text-info"></i>';
+  if (task === '4') return '<i class="fa fa-flag text-success"></i>';
 };
 
-const Status = (value) => (value ? '<i class="fas fa-check  text-dark statusBTN"></i>' : '<i class="fas fa-spinner text-dark statusBTN"></i>');
+const Status = (value) => (value ? '<i class="fa fa-check  text-dark statusBTN"></i>' : '<i class="fa fa-spinner text-dark statusBTN"></i>');
 
 const modalStatus = (value) => (value ? 'Finished' : 'Pending');
 export {

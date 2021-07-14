@@ -31,7 +31,6 @@ function setProjects() {
 
 let currentProject = '';
 
-// initialize and store tasks
 // eslint-disable-next-line
 export let myTasks = [];
 
@@ -44,7 +43,6 @@ function setTasks() {
   window.localStorage.setItem('myTasks', JSON.stringify(myTasks));
 }
 
-// initialize page
 document.addEventListener('DOMContentLoaded', projectsToDom(), makeToday());
 // eslint-disable-next-line
 addForm.addEventListener('submit', (e) => {
@@ -75,6 +73,7 @@ addForm.addEventListener('submit', (e) => {
   setProjects(myProjects);
   projectsContainer.innerHTML = '';
   projectsToDom();
+  addForm.reset();
 });
 
 const projectManipulation = document.getElementById('projectsContainer');
@@ -133,6 +132,7 @@ projectManipulation.addEventListener('click', (e) => {
       setProjects();
       projectsContainer.innerHTML = '';
       projectsToDom();
+      addForm.reset();
     });
   }
   if (clicked.classList.contains('seeBtn')) {
@@ -192,6 +192,7 @@ taskForm.addEventListener('click', (e) => {
 
     makeTaskSection(currentProject, selectedTasks);
     makeToday();
+    taskForm.reset();
   }
 });
 
@@ -257,6 +258,7 @@ tableArticle.addEventListener('click', (e) => {
         const selectedTasks = myTasks.filter((task) => task.projectsN === currentProject);
         makeTaskSection(currentProject, selectedTasks);
         makeToday();
+        taskForm.reset();
       }
     });
   }
