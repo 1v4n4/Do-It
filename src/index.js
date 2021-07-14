@@ -215,6 +215,7 @@ tableArticle.addEventListener('click', (e) => {
     setTasks();
     const selectedTasks = myTasks.filter((task) => task.projectsN === currentProject);
     makeTaskSection(currentProject, selectedTasks);
+    makeToday();
   }
 
   if (clicked.classList.contains('editTaskBtn')) {

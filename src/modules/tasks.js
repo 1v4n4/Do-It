@@ -185,7 +185,7 @@ const makeEditForm = (task) => {
 
 const makeToday = () => {
   todayContainer.innerHTML = '';
-  const todayTasks = myTasks.filter((task) => task.deadline === setDate());
+  const todayTasks = myTasks.filter((task) => task.deadline === setDate() && task.finished === false);
   todayTasks.forEach((task) => {
     todayContainer.innerHTML += `
   <div class="card mx-auto mt-3 bg-light">
