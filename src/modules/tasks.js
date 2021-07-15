@@ -55,7 +55,7 @@ const tasksToDom = (selected) => {
             <td class='col-2 ps-3'><button type='button' class="statusBTN btn p-0 btn-light">${Status(task.finished)}</button></td>
             <td class='col-2 ps-3'><button type='button' class="btn p-0 btn-light" data-bs-toggle="modal" data-bs-target="#Modal${index}">
               Details</button><td>
-              <td class='col-1 ps-3'><button type='button' class='editTaskBtn btn p-0 btn-light'><i class="fa fa-wrench text-dark editTaskBtn"></i></button></td>
+              <td class='col-1 ps-3'><button type='button' class='editTaskBtn editT btn p-0 btn-light active'><i class="fa fa-wrench text-dark editTaskBtn"></i></button></td>
             <td class='col-1 ps-3'><button type='button' class='deleteTaskBtn btn p-0 btn-light'><i class="fa fa-trash text-dark deleteTaskBtn"></i></button></td>
 
           </tr>
@@ -172,21 +172,22 @@ const reasignTasks = (oldName, newName) => {
 
 const makeEditForm = (task) => {
   editTaskForm.innerHTML = `
-      <input type='text' class=' my-2' name='EdiTaskName' id='edit-task-name' value='${task.title}'>
-      <textarea  id='editComment' class='my-2' rows='3' maxlength='150'> ${task.comment}</textarea>
-      <select class='form-select me-4' id='selectPriority1' aria-label='Default select example'>
-              <option selected value='1'>Priority ${Flag(task.priority)}</option>
-              <option class='one' value='1'>&#xf024; Priority 1</option>
-              <option class='two' value='2'>&#xf024; Priority 2</option>
-              <option class='three' value='3'>&#xf024; Priority 3</option>
-              <option class='four' value='4'>&#xf024; Priority 4</option>
+      <input type='text' class=' my-2 x' name='EdiTaskName' id='edit-task-name' value='${task.title}'>
+      <textarea  id='editComment' class='my-2 x' rows='3' maxlength='150'> ${task.comment}</textarea>
+      <select class='form-select me-4 x' id='selectPriority1' aria-label='Default select example'>
+              <option class='x' selected value='1'>Priority ${Flag(task.priority)}</option>
+              <option class='x one' value='1'>&#xf024; Priority 1</option>
+              <option class='x two' value='2'>&#xf024; Priority 2</option>
+              <option class='x three' value='3'>&#xf024; Priority 3</option>
+              <option class='x four' value='4'>&#xf024; Priority 4</option>
       </select>
-      <input type="date" max='2110-13-13' id='datePicker1' value='${task.date}'>
-      <button type='submit' class='confirmEditTask btn btn-secondary' id='confirmEditTask'>Edit task</button>
-      <button type='button' class='dismissEditTask btn btn-light m-3' id='dismissEditTask'>Dismiss</button>
+      <input type="date" class='x' max='2110-13-13' id='datePicker1' value='${task.date}'>
+      <button type='submit' class='x confirmEditTask btn btn-secondary' id='confirmEditTask'>Edit task</button>
+      <button type='button' class='x dismissEditTask btn btn-light m-3' id='dismissEditTask'>Dismiss</button>
     `;
 
   document.getElementById('datePicker1').setAttribute('min', setDate());
+
 };
 
 const makeToday = () => {

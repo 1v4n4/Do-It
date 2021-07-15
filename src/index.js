@@ -246,6 +246,7 @@ tableArticle.addEventListener('click', (e) => {
   e.preventDefault();
   const clicked = e.target;
   // eslint-disable-next-line
+
   const index = parseInt(clicked.closest('tr').firstElementChild.textContent) - 1;
 
   if (clicked.classList.contains('deleteTaskBtn')) {
@@ -265,10 +266,21 @@ tableArticle.addEventListener('click', (e) => {
   }
 
   if (clicked.classList.contains('editTaskBtn')) {
+    console.log(index)
     const taskToEdit = myTasks[index];
     makeEditForm(taskToEdit);
+
+    const html = document.querySelector("html");
+    html.addEventListener("click", function (e) {
+      if (e.target !== clicked && !e.target.classList.contains('x')) {
+        // const selectedTasks = myTasks.filter((task) => task.projectsN === currentProject);
+        // makeTaskSecOnClck(currentProject, selectedTasks);
+        editTaskForm.innerHTML = '';
+      console.log('oj') }
+  });
     editTaskForm.addEventListener('click', (e) => {
       e.preventDefault();
+
       const clicked = e.target;
       if (clicked.classList.contains('dismissEditTask')) {
         editTaskForm.innerHTML = '';
