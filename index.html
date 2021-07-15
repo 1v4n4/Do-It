@@ -26,7 +26,7 @@
     <section class="projects col-3 bg-secondary">
       <div class="title-div d-flex justify-content-center">
         <h1 class="fw-bold"> Projects</h1>
-        <button type="button" class="fw-bold fs-3 ms-3 pb-2 text-dark btn btn-secondary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+        <button type="button" class="fw-bold fs-3 ms-3 pb-2 text-dark btn btn-secondary" data-bs-toggle="modal" data-bs-target="#addProjectModal">
           <i class="fa fa-plus"></i>
         </button>
       </div>
@@ -40,10 +40,10 @@
       <article id="first">
 
       </article>
-      <form class="taskForm border border-dark px-2 mx-1" id='taskForm')>
+      <form class="taskForm border border-dark px-2 mx-1" id='taskForm'>
 
       </form>
-      <form class="taskForm px-2 mx-1" id='editTaskForm')>
+      <form class="taskForm px-2 mx-1" id='editTaskForm'>
 
       </form>
       <article id="tableArticle">
@@ -62,20 +62,20 @@
 
     </section>
   </div>
-  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal fade" id="addProjectModal" tabindex="-1" aria-labelledby="addProjectModalLabel" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Add new project</h5>
+          <h5 class="modal-title" id="addProjectModalLabel">Add new project</h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <form class="modal-body" id="addForm">
 
-            <label for="exampleFormControlInput1" class="form-label">Project name</label>
-            <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="My special project">
+            <label for="addProjectModalInput1" class="form-label">Project name</label>
+            <input type="text" class="form-control" id="addProjectModalInput1" placeholder="My special project">
 
-            <label for="exampleFormControlTextarea1" class="form-label">Description (optional)</label>
-            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" maxlength="150" placeholder="My special project's description"></textarea>
+            <label for="addProjectModalTextarea1" class="form-label">Description (optional)</label>
+            <textarea class="form-control" id="addProjectModalTextarea1" rows="3" maxlength="150" placeholder="My special project's description"></textarea>
 
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
           <button type="submit" class="btn btn-secondary" id="newProjectBtn">Create project</button>
@@ -88,7 +88,7 @@
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Add new project</h5>
+          <h5 class="modal-title" id="exampleModalLabel">Edit project</h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <form class="modal-body" id="editForm">
