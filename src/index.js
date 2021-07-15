@@ -22,7 +22,7 @@ const defaultTasks = [
     projectsN: 'My important project',
     comment: 'No comment',
     priority: '1',
-    deadline: '2021-07-14',
+    deadline: '2021-07-15',
     finished: false,
   },
   {
@@ -38,7 +38,7 @@ const defaultTasks = [
     projectsN: 'My important project',
     comment: '',
     priority: '3',
-    deadline: '2021-07-23',
+    deadline: '2021-07-24',
     finished: false,
   },
   {
@@ -131,15 +131,21 @@ projectManipulation.addEventListener('click', (e) => {
     const project = myProjects.find((x) => x.name === currentProject);
 
     getName.value = project.name;
-
     getDescription.value = project.description;
 
+    console.log(project)
     editForm.addEventListener('submit', (e) => {
       e.preventDefault();
+
 
       const edited = new Project(editForm[0].value, editForm[1].value);
 
       let confirmation = true;
+
+      if (!edited.name) {
+        alert("Project's name can't be empty");
+        confirmation = false;
+      }
 
       if (edited.name === project.name && edited.description === project.description) {
         alert("You haven't change anything");
@@ -163,9 +169,9 @@ projectManipulation.addEventListener('click', (e) => {
       project.description = edited.description;
 
       setProjects();
-      projectsContainer.innerHTML = '';
-      projectsToDom();
-      addForm.reset();
+      alert("Project is edited");
+      location.reload();
+
     });
   }
   if (clicked.classList.contains('seeBtn')) {
