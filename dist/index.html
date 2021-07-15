@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+  <link rel="stylesheet" href="../node_modules/@fortawesome/fontawesome-free/css/all.css">
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link rel="stylesheet" href="./style.css">
+  <link rel="shortcut icon" href="#">
+  <title>Do it</title>
+</head>
+<body>
+<!-- Header -->
+  <header class="bg-dark d-flex justify-content-between">
+    <div class="logo-div ms-5 mt-2">
+      <p class="logo fs-1 ms-3 fw-bold text-secondary">Do it!</p>
+      <i class="fs-2 ms-5 text-secondary fa fa-check"></i>
+  </div>
+    <p class="fs-3 text-secondary fst-italic me-5 mt-5">Make room for unplanned events</p>
+  </header>
+  <!-- Projects -->
+  <div class = "wrapper d-flex">
+    <section class="projects col-3 bg-secondary">
+      <div class="title-div d-flex justify-content-center">
+        <h1 class="fw-bold"> Projects</h1>
+        <button type="button" class="fw-bold fs-3 ms-3 pb-2 text-dark btn btn-secondary" data-bs-toggle="modal" data-bs-target="#addProjectModal">
+          <i class="fa fa-plus"></i>
+        </button>
+      </div>
+
+      <div class="projectsContainer ms-2 mt-5" id="projectsContainer">
+
+      </div>
+
+    </section>
+    <section class="toDos col-6 p-5" id="toDos">
+      <article id="first" class='first'>
+
+      </article>
+      <form class="taskForm border border-dark px-2 mx-1" id='taskForm'>
+
+      </form>
+      <form class="taskForm border border-dark px-2 mx-1 x" id='editTaskForm'>
+
+      </form>
+      <article id="tableArticle">
+
+      </article>
+
+    </section>
+    <section class="today col-3 bg-light">
+        <div class="title-div d-flex justify-content-center">
+          <h2 class="fw-bold">Due today</h2>
+        </div>
+        <div class="todayContainer  ms-2 mt-2" id="todayContainer">
+
+        </div>
+
+
+    </section>
+  </div>
+  <div id="modalDiv">
+  <div class="modal fade" id="addProjectModal" tabindex="-1" aria-labelledby="addProjectModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="addProjectModalLabel">Add new project</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <form class="modal-body" id="addForm">
+
+            <label for="addProjectModalInput1" class="form-label">Project name</label>
+            <input type="text" class="form-control my-2" id="addProjectModalInput1" placeholder="My special project">
+
+            <label for="addProjectModalTextarea1" class="form-label">Description (optional)</label>
+            <textarea class="form-control mb-3" id="addProjectModalTextarea1" rows="3" maxlength="150" placeholder="My special project's description"></textarea>
+
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="submit" class="btn btn-secondary" id="newProjectBtn">Create project</button>
+
+        </form>
+      </div>
+    </div>
+  </div>
+  <div class="modal fade" id="exampleModal1" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Edit project</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <form class="modal-body" id="editForm">
+
+            <label for="nameInput" class="form-label">Project name</label>
+            <input type="text" class="form-control" id="nameInput" >
+
+            <label for="descriptionInput" class="form-label my-2">Description (optional)</label>
+            <textarea class="form-control mb-3" id="descriptionInput" rows="3" maxlength="150" ></textarea>
+
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+
+          <button type="submit" class="btn btn-secondary" id="editPrBtn">Edit project</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+  <footer class="bg-dark col-9"><p class="text-secondary mt-2 text-center fs-6">Made by <a href="https://github.com/1v4n4" class="text-secondary">1v4n4</a>  © 2021</p></footer>
+  <!-- Modals -->
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+  <script src="main.js"></script>
+</body>
+</html>
