@@ -1,0 +1,91 @@
+header {
+  height: 14vh;
+  width: 100%;
+  position: fixed;
+  top: 0;
+  /* z-index: 17; */
+}
+
+.logo {
+  margin-bottom: -0.2rem;
+}
+
+.projects {
+  min-height: 100vh;
+  padding-top: 20vh;
+}
+
+#toDos {
+  margin-top: 7.5vh;
+}
+
+#taskForm,
+#editTaskForm {
+  position: relative;
+}
+
+#task-name,
+#edit-task-name {
+  width: 95%;
+  border: none;
+  height: 2rem;
+}
+
+textarea {
+  width: 95%;
+  border: none;
+  height: 4rem;
+}
+
+#selectPriority,
+#selectPriority1 {
+  position: absolute;
+  bottom: 7%;
+  right: 180px;
+  border: none;
+  font-family: 'Lato', 'Font Awesome 5 Free';
+  border-color: white;
+  width: auto;
+}
+
+#datePicker,
+#datePicker1 {
+  position: absolute;
+  right: 2%;
+  /* z-index: 5; */
+  bottom: 9%;
+  border: none;
+  font-family: 'Lato', 'Font Awesome 5 Free';
+}
+
+.one {
+  color: red;
+}
+
+.two {
+  color: yellow;
+}
+
+.three {
+  color: blue;
+}
+
+.four {
+  color: greenyellow;
+}
+
+.today {
+  min-height: 100vh;
+  padding-top: 16vh;
+  margin-bottom: 4rem;
+}
+
+.card {
+  width: 18rem;
+}
+
+footer {
+  position: fixed;
+  bottom: 0;
+  right: 0;
+}
