@@ -4,7 +4,7 @@ import {
   Project, projectsToDom, deleteProject, checkProject,
 } from './modules/projects';
 // eslint-disable-next-line
-import { makeTaskForm, makeTaskSecOnClck, reasignTasks, changeStatus, Task, makeTaskSection, makeEditForm, deleteAllTasks, countForm, makeToday, closeEditTaskForm
+import { makeTaskForm, makeTaskSecOnClck, reasignTasks, changeStatus, Task, makeTaskSection, makeEditForm, deleteAllTasks, makeToday, closeEditTaskForm, closeTaskForm
 } from './modules/tasks';
 
 const addForm = document.getElementById('addForm');
@@ -203,8 +203,8 @@ taskForm.addEventListener('click', (e) => {
   const clicked = e.target;
 
   if (clicked.classList.contains('dismissTask')) {
-    taskForm.innerHTML = '';
-    countForm = false;
+    closeTaskForm()
+
     return;
   }
 

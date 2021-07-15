@@ -21,7 +21,6 @@ const todayContainer = document.getElementById('todayContainer');
 
 let countProject = false;
 // eslint-disable-next-line
-let countForm = false;
 let countTaskForm = false;
 
 const tasksToDom = (selected) => {
@@ -114,7 +113,7 @@ const makeTaskSection = (value, selected) => {
   <h2 class='prjct text-center'>Project: ${value}</h2>
   <div class=" d-flex justify-content-center plus">
     <h4 class="taskHeadline mt-1 me-5 mt-3 text-center">Tasks</h4>
-    <button type="button" class="pb-2 text-dark btn btn-light plus">
+    <button type="button" class=" pb-2 text-dark btn btn-light plus">
       <i class="fa fa-plus plus"></i>
     </button>
   </div>`;
@@ -125,28 +124,36 @@ const makeTaskSection = (value, selected) => {
 };
 
 const makeTaskForm = () => {
-  if (!countForm) {
-    taskForm.innerHTML = `
-    <input type='text' class=' my-2' name='taskName' id='task-name' placeholder='Add title here'>
-    <textarea  id='comment' class='my-2' rows='3' maxlength='150' placeholder='Add comment here'></textarea>
-    <select class='form-select me-4' id='selectPriority' aria-label='Default select example'>
-            <option selected value='1'>Select priority level</option>
-            <option class='one' value='1'>&#xf024; Priority 1</option>
-            <option class='two' value='2'>&#xf024; Priority 2</option>
-            <option class='three' value='3'>&#xf024; Priority 3</option>
-            <option class='four' value='4'>&#xf024; Priority 4</option>
+  taskForm.innerHTML = `
+    <input type='text' class='y my-2' name='taskName' id='task-name' placeholder='Add title here'>
+    <textarea  id='comment' class='y my-2' rows='3' maxlength='150' placeholder='Add comment here'></textarea>
+    <select class='y form-select me-4' id='selectPriority' aria-label='Default select example'>
+            <option class='y' selected value='1'>Select priority level</option>
+            <option class='y one' value='1'>&#xf024; Priority 1</option>
+            <option class='y two' value='2'>&#xf024; Priority 2</option>
+            <option class='y three' value='3'>&#xf024; Priority 3</option>
+            <option class='y four' value='4'>&#xf024; Priority 4</option>
     </select>
-    <input type="date" max='2110-13-13' id='datePicker'>
-    <button type='button' class='confirmTask btn btn-secondary' id='confirmTask'>Create task</button>
-    <button type='button' class='dismissTask btn btn-light m-3' id='dismissTask'>Dismiss</button>
+    <input class='y' type="date" max='2110-13-13' id='datePicker'>
+    <button type='button' class='y confirmTask btn btn-secondary' id='confirmTask'>Create task</button>
+    <button type='button' class='y dismissTask btn btn-light m-3' id='dismissTask'>Dismiss</button>
   `;
 
     document.getElementById('datePicker').setAttribute('min', setDate());
-    countForm = true;
-  } else {
-    taskForm.innerHTML = '';
-    countForm = false;
-  }
+
+    html.addEventListener("click", function (e) {
+      if (!e.target.classList.contains('y') && !e.target.classList.contains('plus') ) {
+        closeTaskForm();
+
+        console.log('in close add form');
+        return;
+      }
+    });
+
+}
+
+const closeTaskForm  = ()  => {
+  taskForm.innerHTML = '';
 };
 
 const changeStatus = (index) => {
@@ -202,7 +209,6 @@ const makeEditForm = (task, clicked) => {
 
 const closeEditTaskForm = () => {
   editTaskForm.innerHTML = '';
-
   }
 
 const makeToday = () => {
@@ -229,5 +235,5 @@ const makeToday = () => {
 
 export {
   // eslint-disable-next-line
-  makeTaskForm, makeTaskSecOnClck, closeEditTaskForm, reasignTasks, changeStatus, Task, makeTaskSection, makeEditForm, deleteAllTasks, countForm, makeToday,
+  makeTaskForm, makeTaskSecOnClck, closeEditTaskForm, reasignTasks, changeStatus, Task, makeTaskSection, makeEditForm, closeTaskForm, deleteAllTasks, makeToday,
 };
