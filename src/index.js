@@ -50,8 +50,7 @@ const defaultTasks = [
   },
 ];
 
-// eslint-disable-next-line
-export let myProjects = [];
+let myProjects = [];
 
 if (localStorage.getItem('myProjects') !== null) {
   myProjects = JSON.parse(window.localStorage.getItem('myProjects'));
@@ -266,7 +265,6 @@ tableArticle.addEventListener('click', (e) => {
   }
 
   if (clicked.classList.contains('editTaskBtn')) {
-    // eslint-disable-next-line
     const index = parseInt(clicked.closest('tr').firstElementChild.textContent, 10);
 
     const taskToEdit = myTasks[index];
