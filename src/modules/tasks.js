@@ -12,12 +12,13 @@ function Task(title, projectsN, comment, priority, deadline) {
   this.deadline = deadline;
   this.finished = false;
 }
-const html = document.querySelector("html");
+const html = document.querySelector('html');
 const first = document.getElementById('first');
 const taskForm = document.getElementById('taskForm');
 const editTaskForm = document.getElementById('editTaskForm');
 const tableArticle = document.getElementById('tableArticle');
 const todayContainer = document.getElementById('todayContainer');
+const modalDiv = document.getElementById('modalDiv')
 
 let countProject = false;
 // eslint-disable-next-line
@@ -46,9 +47,9 @@ const tasksToDom = (selected) => {
   taskBody.className = 'ps-5';
   tableArticle.appendChild(taskBody);
   selected.forEach((task) => {
-    const index = myTasks.indexOf(task) + 1;
+    const index = myTasks.indexOf(task);
     taskBody.innerHTML += `
-          <tr>
+          <tr class="my-2 p-4">
             <th scope="row" class='col-1 text-light'>${index}</th>
             <td class='col-3'>${task.title}</td>
             <td class='col-2 ps-4'>${Flag(task.priority)}</td>
@@ -58,9 +59,9 @@ const tasksToDom = (selected) => {
             <td class='col-1 ps-3'><button type='button' class='editTaskBtn btn p-0 btn-light'><i class="fa fa-wrench text-dark editTaskBtn"></i></button></td>
             <td class='col-1 ps-3'><button type='button' class='deleteTaskBtn btn p-0 btn-light'><i class="fa fa-trash text-dark deleteTaskBtn"></i></button></td>
 
-          </tr>
-
-          <div class="modal fade" id="Modal${index}" tabindex="-1" aria-labelledby="${index}Label" aria-hidden="true">
+          </tr>`
+modalDiv.innerHTML += `
+<div class="modal fade" id="Modal${index}" tabindex="-1" aria-labelledby="${index}Label" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
@@ -123,6 +124,10 @@ const makeTaskSection = (value, selected) => {
   countProject = true;
 };
 
+const closeTaskForm = () => {
+  taskForm.innerHTML = '';
+};
+
 const makeTaskForm = () => {
   taskForm.innerHTML = `
     <input type='text' class='y my-2' name='taskName' id='task-name' placeholder='Add title here'>
@@ -139,21 +144,13 @@ const makeTaskForm = () => {
     <button type='button' class='y dismissTask btn btn-light m-3' id='dismissTask'>Dismiss</button>
   `;
 
-    document.getElementById('datePicker').setAttribute('min', setDate());
+  document.getElementById('datePicker').setAttribute('min', setDate());
 
-    html.addEventListener("click", function (e) {
-      if (!e.target.classList.contains('y') && !e.target.classList.contains('plus') ) {
-        closeTaskForm();
-
-        console.log('in close add form');
-        return;
-      }
-    });
-
-}
-
-const closeTaskForm  = ()  => {
-  taskForm.innerHTML = '';
+  html.addEventListener('click', (e) => {
+    if (!e.target.classList.contains('y') && !e.target.classList.contains('plus')) {
+      closeTaskForm();
+    }
+  });
 };
 
 const changeStatus = (index) => {
@@ -170,16 +167,18 @@ const deleteAllTasks = (currentProject) => {
 };
 
 const reasignTasks = (oldName, newName) => {
-  console.log(oldName, newName)
   myTasks.forEach((task) => {
     if (task.projectsN === oldName) {
       task.projectsN = newName;
     }
-  })
+  });
 };
 
-const makeEditForm = (task, clicked) => {
-  console.log('in form')
+const closeEditTaskForm = () => {
+  editTaskForm.innerHTML = '';
+};
+
+const makeEditForm = (task) => {
   editTaskForm.innerHTML = `
       <input type='text' class=' my-2 x' name='EdiTaskName' id='edit-task-name' value='${task.title}'>
       <textarea  id='editComment' class='my-2 x' rows='3' maxlength='150'> ${task.comment}</textarea>
@@ -194,22 +193,14 @@ const makeEditForm = (task, clicked) => {
       <button type='submit' class='x confirmEditTask btn btn-secondary' id='confirmEditTask'>Edit task</button>
       <button type='button' class='x dismissEditTask btn btn-light m-3' id='dismissEditTask'>Dismiss</button>
     `;
-    console.log("after make")
-    document.getElementById('datePicker1').setAttribute('min', setDate());
+  document.getElementById('datePicker1').setAttribute('min', setDate());
 
-    html.addEventListener("click", function (e) {
-      if (!e.target.classList.contains('x') && !e.target.classList.contains('editTaskBtn') ) {
-        closeEditTaskForm();
-
-        console.log('in close form');
-        return;
-      }
-    });
+  html.addEventListener('click', (e) => {
+    if (!e.target.classList.contains('x') && !e.target.classList.contains('editTaskBtn')) {
+      closeEditTaskForm();
+    }
+  });
 };
-
-const closeEditTaskForm = () => {
-  editTaskForm.innerHTML = '';
-  }
 
 const makeToday = () => {
   todayContainer.innerHTML = '';

@@ -15,7 +15,6 @@ const projectsContainer = document.getElementById('projectsContainer');
 const tableArticle = document.getElementById('tableArticle');
 const editForm = document.getElementById('editForm');
 const editTaskForm = document.getElementById('editTaskForm');
-const html = document.querySelector("html");
 
 const defaultTasks = [
   {
@@ -121,6 +120,7 @@ projectManipulation.addEventListener('click', (e) => {
   if (clicked.classList.contains('delProjectBtn')) {
     alert('No kidding?!');
     clicked.closest('article').remove();
+    alert('Project deleted')
     deleteProject(myProjects, currentProject);
     deleteAllTasks(currentProject);
     setProjects();
@@ -134,10 +134,8 @@ projectManipulation.addEventListener('click', (e) => {
     getName.value = project.name;
     getDescription.value = project.description;
 
-    console.log(project)
     editForm.addEventListener('submit', (e) => {
       e.preventDefault();
-
 
       const edited = new Project(editForm[0].value, editForm[1].value);
 
@@ -166,7 +164,6 @@ projectManipulation.addEventListener('click', (e) => {
         return;
       }
 
-
       reasignTasks(project.name, edited.name);
       setTasks();
 
@@ -174,7 +171,8 @@ projectManipulation.addEventListener('click', (e) => {
       project.description = edited.description;
 
       setProjects();
-      alert("Project is edited");
+      alert('Project is edited');
+      // eslint-disable-next-line
       location.reload();
     });
   }
@@ -203,7 +201,7 @@ taskForm.addEventListener('click', (e) => {
   const clicked = e.target;
 
   if (clicked.classList.contains('dismissTask')) {
-    closeTaskForm()
+    closeTaskForm();
 
     return;
   }
@@ -247,17 +245,18 @@ tableArticle.addEventListener('click', (e) => {
   e.preventDefault();
   const clicked = e.target;
   // eslint-disable-next-line
-
-  const index = parseInt(clicked.closest('tr').firstElementChild.textContent) - 1;
-  console.log('first index', index)
+  const index = parseInt(clicked.closest('tr').firstElementChild.textContent);
 
   if (clicked.classList.contains('deleteTaskBtn')) {
     alert('Are you sure?');
     clicked.closest('tr').remove();
     myTasks.splice(index, 1);
-    setTasks();
-    makeToday();
+    alert('Task deleted');
   }
+    setTasks();
+    const selectedTasks = myTasks.filter((task) => task.projectsN === currentProject);
+    makeTaskSection(currentProject, selectedTasks);
+    makeToday();
 
   if (clicked.classList.contains('statusBTN')) {
     changeStatus(index);
@@ -268,17 +267,11 @@ tableArticle.addEventListener('click', (e) => {
   }
 
   if (clicked.classList.contains('editTaskBtn')) {
-    const index = parseInt(clicked.closest('tr').firstElementChild.textContent) - 1;
-    console.log(index)
+    // eslint-disable-next-line
+    const index = parseInt(clicked.closest('tr').firstElementChild.textContent);
+
     const taskToEdit = myTasks[index];
-    console.log(taskToEdit)
-    console.log('ej', taskToEdit, clicked)
-    makeEditForm(taskToEdit, clicked);
-    console.log('form made')
-
-
-           console.log('down');
-
+    makeEditForm(taskToEdit);
 
     editTaskForm.addEventListener('click', (e) => {
       e.preventDefault();
@@ -286,8 +279,7 @@ tableArticle.addEventListener('click', (e) => {
       const clicked = e.target;
       if (clicked.classList.contains('dismissEditTask')) {
         closeEditTaskForm();
-        console.log('in close')
-        }
+      }
 
       if (clicked.classList.contains('confirmEditTask')) {
         // eslint-disable-next-line
@@ -317,17 +309,12 @@ tableArticle.addEventListener('click', (e) => {
         const editedTask = new Task(editTitle, currentProject, editComment, editPriority, editDate);
         myTasks.splice(index, 1, editedTask);
         setTasks();
-        alert("Task edited");
+        alert('Task edited');
         closeEditTaskForm();
-        console.log('closed')
         const selectedTasks = myTasks.filter((task) => task.projectsN === currentProject);
         makeTaskSection(currentProject, selectedTasks);
         makeToday();
-
       }
     });
-
-
   }
 });
-
