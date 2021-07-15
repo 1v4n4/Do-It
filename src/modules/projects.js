@@ -1,6 +1,3 @@
-// eslint-disable-next-line
-import { myProjects } from '../index';
-
 const projectsContainer = document.getElementById('projectsContainer');
 
 function Project(name, description) {
@@ -8,7 +5,7 @@ function Project(name, description) {
   this.description = description;
 }
 
-const checkProject = (value) => {
+const checkProject = (value, myProjects) => {
   for (let i = 0; i < myProjects.length; i += 1) {
     if (myProjects[i].name === value) {
       return true;
@@ -61,7 +58,7 @@ const projectToDom = (project) => {
   projectsContainer.appendChild(projectArticle);
 };
 
-const projectsToDom = () => {
+const projectsToDom = (myProjects) => {
   if (myProjects.length === 0) {
     const project0 = new Project('My important project', 'My important project\'s description');
     projectToDom(project0);

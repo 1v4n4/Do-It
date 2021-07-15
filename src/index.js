@@ -1,5 +1,4 @@
 import { setDate } from './modules/helpers';
-// eslint-disable-next-line
 import {
   Project, projectsToDom, deleteProject, checkProject,
 } from './modules/projects';
@@ -75,7 +74,7 @@ function setTasks() {
   window.localStorage.setItem('myTasks', JSON.stringify(myTasks));
 }
 
-document.addEventListener('DOMContentLoaded', projectsToDom(), makeToday());
+document.addEventListener('DOMContentLoaded', projectsToDom(myProjects), makeToday());
 // eslint-disable-next-line
 addForm.addEventListener('submit', (e) => {
   e.preventDefault();
@@ -91,7 +90,7 @@ addForm.addEventListener('submit', (e) => {
     confirmation = false;
   }
 
-  if (checkProject(newName)) {
+  if (checkProject(newName, myProjects)) {
     alert('Project with same name already exists');
     confirmation = false;
   }
@@ -104,7 +103,7 @@ addForm.addEventListener('submit', (e) => {
   myProjects.push(newProject);
   setProjects();
   projectsContainer.innerHTML = '';
-  projectsToDom();
+  projectsToDom(myProjects);
   addForm.reset();
 });
 
@@ -154,7 +153,7 @@ projectManipulation.addEventListener('click', (e) => {
 
       const checkData = edited.name;
 
-      if (checkProject(checkData) && edited.name !== project.name) {
+      if (checkProject(checkData, myProjects) && edited.name !== project.name) {
         alert('Project with same name already exists');
 
         confirmation = false;
@@ -244,8 +243,8 @@ taskForm.addEventListener('click', (e) => {
 tableArticle.addEventListener('click', (e) => {
   e.preventDefault();
   const clicked = e.target;
-  // eslint-disable-next-line
-  const index = parseInt(clicked.closest('tr').firstElementChild.textContent);
+
+  const index = parseInt(clicked.closest('tr').firstElementChild.textContent, 10);
 
   if (clicked.classList.contains('deleteTaskBtn')) {
     alert('Are you sure?');
@@ -268,7 +267,8 @@ tableArticle.addEventListener('click', (e) => {
 
   if (clicked.classList.contains('editTaskBtn')) {
     // eslint-disable-next-line
-    const index = parseInt(clicked.closest('tr').firstElementChild.textContent);
+    const index = parseInt(clicked.closest('tr').firstElementChild.textContent, 10);
+
     const taskToEdit = myTasks[index];
     makeEditForm(taskToEdit);
 
