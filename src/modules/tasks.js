@@ -104,6 +104,11 @@ const makeTaskSecOnClck = (value, selected) => {
   }
 };
 
+const loadAfterEdit = (value, selected) => {
+  countProject = false;
+  makeTaskSecOnClck(value, selected);
+};
+
 const makeTaskSection = (value, selected) => {
   first.innerHTML = '';
   taskForm.innerHTML = '';
@@ -226,5 +231,5 @@ const makeToday = () => {
 
 export {
   // eslint-disable-next-line
-  makeTaskForm, makeTaskSecOnClck, closeEditTaskForm, reasignTasks, changeStatus, Task, makeTaskSection, makeEditForm, closeTaskForm, deleteAllTasks, makeToday,
+  makeTaskForm, makeTaskSecOnClck, closeEditTaskForm, reasignTasks, changeStatus, Task, makeTaskSection, makeEditForm, loadAfterEdit, closeTaskForm, deleteAllTasks, makeToday,
 };

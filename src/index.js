@@ -4,7 +4,7 @@ import {
   Project, projectsToDom, deleteProject, checkProject,
 } from './modules/projects';
 // eslint-disable-next-line
-import { makeTaskForm, makeTaskSecOnClck, reasignTasks, changeStatus, Task, makeTaskSection, makeEditForm, deleteAllTasks, makeToday, closeEditTaskForm, closeTaskForm
+import { makeTaskForm, makeTaskSecOnClck, loadAfterEdit, reasignTasks, changeStatus, Task, makeTaskSection, makeEditForm, deleteAllTasks, makeToday, closeEditTaskForm, closeTaskForm
 } from './modules/tasks';
 
 const addForm = document.getElementById('addForm');
@@ -269,7 +269,6 @@ tableArticle.addEventListener('click', (e) => {
   if (clicked.classList.contains('editTaskBtn')) {
     // eslint-disable-next-line
     const index = parseInt(clicked.closest('tr').firstElementChild.textContent);
-
     const taskToEdit = myTasks[index];
     makeEditForm(taskToEdit);
 
@@ -283,12 +282,11 @@ tableArticle.addEventListener('click', (e) => {
 
       if (clicked.classList.contains('confirmEditTask')) {
         // eslint-disable-next-line
-
         const editTitle = editTaskForm[0].value;
         const editComment = editTaskForm[1].value;
         const editPriority = editTaskForm[2].value;
         let editDate = editTaskForm[3].value;
-
+        closeEditTaskForm();
         let confirm = true;
 
         if (!editTitle) {
@@ -306,14 +304,15 @@ tableArticle.addEventListener('click', (e) => {
           editDate = setDate();
         }
 
-        const editedTask = new Task(editTitle, currentProject, editComment, editPriority, editDate);
-        myTasks.splice(index, 1, editedTask);
+        taskToEdit.title = editTitle;
+        taskToEdit.projectsN = currentProject;
+        taskToEdit.comment = editComment;
+        taskToEdit.priority = editPriority;
+        taskToEdit.deadline = editDate;
         setTasks();
         alert('Task edited');
-        closeEditTaskForm();
-        const selectedTasks = myTasks.filter((task) => task.projectsN === currentProject);
-        makeTaskSection(currentProject, selectedTasks);
-        makeToday();
+        // eslint-disable-next-line
+        location.reload();
       }
     });
   }
