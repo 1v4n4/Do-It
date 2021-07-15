@@ -18,7 +18,7 @@ const taskForm = document.getElementById('taskForm');
 const editTaskForm = document.getElementById('editTaskForm');
 const tableArticle = document.getElementById('tableArticle');
 const todayContainer = document.getElementById('todayContainer');
-const modalDiv = document.getElementById('modalDiv')
+const modalDiv = document.getElementById('modalDiv');
 
 let countProject = false;
 // eslint-disable-next-line
@@ -59,8 +59,8 @@ const tasksToDom = (selected) => {
             <td class='col-1 ps-3'><button type='button' class='editTaskBtn btn p-0 btn-light'><i class="fa fa-wrench text-dark editTaskBtn"></i></button></td>
             <td class='col-1 ps-3'><button type='button' class='deleteTaskBtn btn p-0 btn-light'><i class="fa fa-trash text-dark deleteTaskBtn"></i></button></td>
 
-          </tr>`
-modalDiv.innerHTML += `
+          </tr>`;
+    modalDiv.innerHTML += `
 <div class="modal fade" id="Modal${index}" tabindex="-1" aria-labelledby="${index}Label" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">

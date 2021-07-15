@@ -120,7 +120,7 @@ projectManipulation.addEventListener('click', (e) => {
   if (clicked.classList.contains('delProjectBtn')) {
     alert('No kidding?!');
     clicked.closest('article').remove();
-    alert('Project deleted')
+    alert('Project deleted');
     deleteProject(myProjects, currentProject);
     deleteAllTasks(currentProject);
     setProjects();
@@ -253,10 +253,10 @@ tableArticle.addEventListener('click', (e) => {
     myTasks.splice(index, 1);
     alert('Task deleted');
   }
-    setTasks();
-    const selectedTasks = myTasks.filter((task) => task.projectsN === currentProject);
-    makeTaskSection(currentProject, selectedTasks);
-    makeToday();
+  setTasks();
+  const selectedTasks = myTasks.filter((task) => task.projectsN === currentProject);
+  makeTaskSection(currentProject, selectedTasks);
+  makeToday();
 
   if (clicked.classList.contains('statusBTN')) {
     changeStatus(index);
