@@ -4,7 +4,7 @@ import {
   Project, projectsToDom, deleteProject, checkProject,
 } from './modules/projects';
 // eslint-disable-next-line
-import { makeTaskForm, makeTaskSecOnClck, reasignTasks, changeStatus, Task, makeTaskSection, makeEditForm, deleteAllTasks, countForm, makeToday,
+import { makeTaskForm, makeTaskSecOnClck, reasignTasks, changeStatus, Task, makeTaskSection, makeEditForm, deleteAllTasks, countForm, makeToday, closeEditTaskForm
 } from './modules/tasks';
 
 const addForm = document.getElementById('addForm');
@@ -15,6 +15,7 @@ const projectsContainer = document.getElementById('projectsContainer');
 const tableArticle = document.getElementById('tableArticle');
 const editForm = document.getElementById('editForm');
 const editTaskForm = document.getElementById('editTaskForm');
+const html = document.querySelector("html");
 
 const defaultTasks = [
   {
@@ -248,6 +249,7 @@ tableArticle.addEventListener('click', (e) => {
   // eslint-disable-next-line
 
   const index = parseInt(clicked.closest('tr').firstElementChild.textContent) - 1;
+  console.log('first index', index)
 
   if (clicked.classList.contains('deleteTaskBtn')) {
     alert('Are you sure?');
@@ -266,25 +268,27 @@ tableArticle.addEventListener('click', (e) => {
   }
 
   if (clicked.classList.contains('editTaskBtn')) {
+    const index = parseInt(clicked.closest('tr').firstElementChild.textContent) - 1;
     console.log(index)
     const taskToEdit = myTasks[index];
-    makeEditForm(taskToEdit);
+    console.log(taskToEdit)
+    console.log('ej', taskToEdit, clicked)
+    makeEditForm(taskToEdit, clicked);
+    console.log('form made')
 
-    const html = document.querySelector("html");
-    html.addEventListener("click", function (e) {
-      if (e.target !== clicked && !e.target.classList.contains('x')) {
-        // const selectedTasks = myTasks.filter((task) => task.projectsN === currentProject);
-        // makeTaskSecOnClck(currentProject, selectedTasks);
-        editTaskForm.innerHTML = '';
-      console.log('oj') }
-  });
+
+           console.log('down');
+
+
     editTaskForm.addEventListener('click', (e) => {
       e.preventDefault();
 
       const clicked = e.target;
       if (clicked.classList.contains('dismissEditTask')) {
-        editTaskForm.innerHTML = '';
-      }
+        closeEditTaskForm();
+        console.log('in close')
+        }
+
       if (clicked.classList.contains('confirmEditTask')) {
         // eslint-disable-next-line
 
@@ -313,11 +317,17 @@ tableArticle.addEventListener('click', (e) => {
         const editedTask = new Task(editTitle, currentProject, editComment, editPriority, editDate);
         myTasks.splice(index, 1, editedTask);
         setTasks();
+        alert("Task edited");
+        closeEditTaskForm();
+        console.log('closed')
         const selectedTasks = myTasks.filter((task) => task.projectsN === currentProject);
         makeTaskSection(currentProject, selectedTasks);
         makeToday();
-        editTaskForm.reset();
+
       }
     });
+
+
   }
 });
+

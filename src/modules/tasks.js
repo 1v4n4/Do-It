@@ -12,7 +12,7 @@ function Task(title, projectsN, comment, priority, deadline) {
   this.deadline = deadline;
   this.finished = false;
 }
-
+const html = document.querySelector("html");
 const first = document.getElementById('first');
 const taskForm = document.getElementById('taskForm');
 const editTaskForm = document.getElementById('editTaskForm');
@@ -22,6 +22,7 @@ const todayContainer = document.getElementById('todayContainer');
 let countProject = false;
 // eslint-disable-next-line
 let countForm = false;
+let countTaskForm = false;
 
 const tasksToDom = (selected) => {
   const taskTable = document.createElement('table');
@@ -55,7 +56,7 @@ const tasksToDom = (selected) => {
             <td class='col-2 ps-3'><button type='button' class="statusBTN btn p-0 btn-light">${Status(task.finished)}</button></td>
             <td class='col-2 ps-3'><button type='button' class="btn p-0 btn-light" data-bs-toggle="modal" data-bs-target="#Modal${index}">
               Details</button><td>
-              <td class='col-1 ps-3'><button type='button' class='editTaskBtn editT btn p-0 btn-light active'><i class="fa fa-wrench text-dark editTaskBtn"></i></button></td>
+            <td class='col-1 ps-3'><button type='button' class='editTaskBtn btn p-0 btn-light'><i class="fa fa-wrench text-dark editTaskBtn"></i></button></td>
             <td class='col-1 ps-3'><button type='button' class='deleteTaskBtn btn p-0 btn-light'><i class="fa fa-trash text-dark deleteTaskBtn"></i></button></td>
 
           </tr>
@@ -170,7 +171,8 @@ const reasignTasks = (oldName, newName) => {
   })
 };
 
-const makeEditForm = (task) => {
+const makeEditForm = (task, clicked) => {
+  console.log('in form')
   editTaskForm.innerHTML = `
       <input type='text' class=' my-2 x' name='EdiTaskName' id='edit-task-name' value='${task.title}'>
       <textarea  id='editComment' class='my-2 x' rows='3' maxlength='150'> ${task.comment}</textarea>
@@ -185,10 +187,23 @@ const makeEditForm = (task) => {
       <button type='submit' class='x confirmEditTask btn btn-secondary' id='confirmEditTask'>Edit task</button>
       <button type='button' class='x dismissEditTask btn btn-light m-3' id='dismissEditTask'>Dismiss</button>
     `;
+    console.log("after make")
+    document.getElementById('datePicker1').setAttribute('min', setDate());
 
-  document.getElementById('datePicker1').setAttribute('min', setDate());
+    html.addEventListener("click", function (e) {
+      if (!e.target.classList.contains('x') && !e.target.classList.contains('editTaskBtn') ) {
+        closeEditTaskForm();
 
+        console.log('in close form');
+        return;
+      }
+    });
 };
+
+const closeEditTaskForm = () => {
+  editTaskForm.innerHTML = '';
+
+  }
 
 const makeToday = () => {
   todayContainer.innerHTML = '';
@@ -214,5 +229,5 @@ const makeToday = () => {
 
 export {
   // eslint-disable-next-line
-  makeTaskForm, makeTaskSecOnClck, reasignTasks, changeStatus, Task, makeTaskSection, makeEditForm, deleteAllTasks, countForm, makeToday,
+  makeTaskForm, makeTaskSecOnClck, closeEditTaskForm, reasignTasks, changeStatus, Task, makeTaskSection, makeEditForm, deleteAllTasks, countForm, makeToday,
 };
