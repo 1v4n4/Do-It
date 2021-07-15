@@ -4,7 +4,7 @@ import {
   Project, projectsToDom, deleteProject, checkProject,
 } from './modules/projects';
 // eslint-disable-next-line
-import { makeTaskForm, makeTaskSecOnClck, changeStatus, Task, makeTaskSection, makeEditForm, deleteAllTasks, countForm, makeToday,
+import { makeTaskForm, makeTaskSecOnClck, reasignTasks, changeStatus, Task, makeTaskSection, makeEditForm, deleteAllTasks, countForm, makeToday,
 } from './modules/tasks';
 
 const addForm = document.getElementById('addForm');
@@ -165,13 +165,16 @@ projectManipulation.addEventListener('click', (e) => {
         return;
       }
 
+
+      reasignTasks(project.name, edited.name);
+      setTasks();
+
       project.name = edited.name;
       project.description = edited.description;
 
       setProjects();
       alert("Project is edited");
       location.reload();
-
     });
   }
   if (clicked.classList.contains('seeBtn')) {

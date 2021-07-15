@@ -161,6 +161,15 @@ const deleteAllTasks = (currentProject) => {
   todayContainer.innerHTML = '';
 };
 
+const reasignTasks = (oldName, newName) => {
+  console.log(oldName, newName)
+  myTasks.forEach((task) => {
+    if (task.projectsN === oldName) {
+      task.projectsN = newName;
+    }
+  })
+};
+
 const makeEditForm = (task) => {
   editTaskForm.innerHTML = `
       <input type='text' class=' my-2' name='EdiTaskName' id='edit-task-name' value='${task.title}'>
@@ -204,5 +213,5 @@ const makeToday = () => {
 
 export {
   // eslint-disable-next-line
-  makeTaskForm, makeTaskSecOnClck, changeStatus, Task, makeTaskSection, makeEditForm, deleteAllTasks, countForm, makeToday,
+  makeTaskForm, makeTaskSecOnClck, reasignTasks, changeStatus, Task, makeTaskSection, makeEditForm, deleteAllTasks, countForm, makeToday,
 };
