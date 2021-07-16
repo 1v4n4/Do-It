@@ -6,7 +6,7 @@ Users can see today's pending tasks in a separate section.
 
 ![Screenshot](./dist/images/ScreenshotTodo.png)
 
-### [Check Do It](https://1v4n4.github.io/to-do-list/)
+### [Check Do It](https://1v4n4.github.io/Do-It/)
 
 ## Built With
 
