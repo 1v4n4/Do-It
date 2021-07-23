@@ -23,8 +23,11 @@ Users can see today's pending tasks in a separate section.
 
 ## Usage
 
-  Run `npm run` build in  Terminal to build the assets using webpack.
-  Run `npm run` start in Terminal to start the server and look at the result in localhost:8080
+  Run `npm run build` in  Terminal to build the assets using webpack.
+  Run `npm run start` in Terminal to start the server and look at the result in localhost:8080.
+
+## Testing
+The app uses Jest for testing. Command for running the tests that are located in the 'tests' folder is `npm test`.
 
 ## Author
 **Ivana Novaković-Leković**
