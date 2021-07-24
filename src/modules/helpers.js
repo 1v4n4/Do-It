@@ -25,6 +25,7 @@ const Status = (value) => (value ? '<i class="fa fa-check  text-dark statusBTN">
 
 const modalStatus = (value) => (value ? 'Finished' : 'Pending');
 
+// the rest of functions are modified versions of functions in the task module. That is made only for test practise, it has nothing to do with app itself  
 const makesToday = (todayTasks) => {
   const todayContainer = document.createElement('div');
   todayContainer.innerHTML = '';
