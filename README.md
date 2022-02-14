@@ -10,10 +10,10 @@ Users can see today's pending tasks in a separate section.
 
 ## Built With
 
-  Javascript
-  Bootstrap
-  CSS
-  Webpack
+  - Javascript
+  - Bootstrap
+  - CSS
+  - Webpack
 
 ## Setup
 
