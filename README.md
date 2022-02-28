@@ -1,8 +1,11 @@
 # Do It
 
-Do It is an application that helps users to organize their lives. They can create (edit and delete) project with titles and optional descriptions and for each project an unlimited amount of to-dos.
-Tasks they have priority and status tags, as well as deadlines. Status can be changed in the task's table, the rest of its content can be edited or whole tasks can be deleted. Users can add comments if they want.
-Users can see today's pending tasks in a separate section.
+Do it is a web application that helps users to organize their lives, by creating, editing, deleting, prioritizing tasks and projects. 
+Users can create (edit and delete) project with titles and optional descriptions and an unlimited amount of to-dos. 
+Tasks have priority and status tags, as well as deadlines. Status can be changed in the task's table, the rest of its content can be edited or whole tasks can be deleted. 
+Users can add comments if they want. Users can see today's pending tasks in a separate section.
+When completed, the task is removed from the list.
+This whole project is made using vanilla JavaScript.
 
 ![Screenshot](./dist/images/ScreenshotTodo.png)
 
